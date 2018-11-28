@@ -4,7 +4,6 @@
 
 
 <% Empleados E = (Empleados)session.getAttribute("user"); %>
-
 <% Consultas c = new Consultas(); %>
 <% TipoEmpleado T = c.getCargo(E.getCod_tipoempleado()); %>
 

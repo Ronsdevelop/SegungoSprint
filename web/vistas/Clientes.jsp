@@ -1,8 +1,12 @@
 
+<%@page import="model.TipoEmpleado"%>
+<%@page import="dao.Consultas"%>
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
-<% if (E != null) { %>   
 
+<% if (E != null) { %>   
+<% Consultas c = new Consultas(); %>
+<% TipoEmpleado Tip = c.getCargo(E.getCod_tipoempleado()); %>
 <%@page import="dao.ClienteDAO"%>
 <%@page import="dao.TipoDocDAO"%>
 <%@page import="model.Cliente"%>
@@ -17,6 +21,9 @@
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             <jsp:include page="../html/header.jsp" />
+
+            <% if (Tip.getTempleado().equals("ADMINISTRADOR") ) {     %>       
+
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -207,6 +214,9 @@
                 <!-- /.content -->
 
             </div>
+            <%} else { %>
+            <jsp:include page="../html/noacceso.jsp" />
+            <%}%>
             <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="../Publico/bower_components/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="../Publico/bower_components/Ionicons/css/ionicons.min.css">
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <!-- DataTables -->
 <link rel="stylesheet" href="../Publico/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <!-- Theme style -->
