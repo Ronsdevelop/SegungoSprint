@@ -72,32 +72,31 @@ public class ServEmpleado extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nombre = request.getParameter("nom");
-        String aPaterno = request.getParameter("ape");
-        String aMaterno = request.getParameter("ame");
+        String nombres = request.getParameter("nom");
+        int cod_tipoempleado = Integer.parseInt(request.getParameter("tem"));
+        String apellido = request.getParameter("ape");
+        String dni = request.getParameter("dni");
+        String usuario = request.getParameter("usu");
+        String password = request.getParameter("pas");
         String telefono = request.getParameter("tel");
-        String correo = request.getParameter("email");
-        String temp = request.getParameter("tem");
-        String usuario = request.getParameter("uss");
-        String clave = request.getParameter("pass");
-        String estado = request.getParameter("est");
+        String email = request.getParameter("ema");
+        int estado = Integer.parseInt(request.getParameter("est"));
         model.Empleados em = new model.Empleados();
-        em.setNombres(nombre);
-        /*em.setAppaterno(aPaterno);
-        em.setApmaterno(aMaterno); */
-        em.setFono(telefono);
-        em.setEmail(correo);
-        em.setCod_tipoempleado(temp);
-        em.setUsuario(usuario);
-        em.setClave(clave);
+        em.setNombres(nombres);
+        em.setCod_tipoem(cod_tipoempleado);
+        em.setApellidos(apellido);
+        em.setDni(dni);
+        em.setUsername(usuario);
+        em.setPassword(password);
+        em.setTelefono(telefono);
+        em.setEmail(email);
         em.setEstado(estado);
-        if (dao.EmpleadosDAO.RegistrarEmpleado(em)) {
-            request.setAttribute("mensaje", "Empleado Registrado");
+        if (dao.EmpleadosDAO.RegistrarEmpleados(em)) {
+            request.setAttribute("mensaje", "Registrado CORRECTAMENTE");
         } else {
-            request.setAttribute("mensaje", "Empleado no registrado");
+            request.setAttribute("mensaje", "ERROR al Registrar");
         }
-        request.getRequestDispatcher("RegistrarEmpleado.jsp").forward(request, response);
-        processRequest(request, response);
+        response.sendRedirect("vistas/empleados.jsp");
 
     }
     @Override

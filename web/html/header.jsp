@@ -5,11 +5,11 @@
 
 <% Empleados E = (Empleados)session.getAttribute("user"); %>
 <% Consultas c = new Consultas(); %>
-<% TipoEmpleado T = c.getCargo(E.getCod_tipoempleado()); %>
+<% TipoEmpleado T = c.getCargo(E.getCod_tipoem()); %>
 
 <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="../vistas/home.jsp" class="logo">
 
         <span class="logo-lg"><b>LAS AMERICAS</b></span>
     </a>
@@ -77,10 +77,14 @@
                     <i class="fa fa-home"></i> <span>Inicio</span>
                 </a>
             </li>
+                             
+ 
+       
             <li><a href="recepcion.jsp"><i class="fa fa-bed"></i> <span>Recepcion</span></a></li>
             <li><a href="reservas.jsp"><i class="fa fa-calendar"></i> <span>Reservas</span></a></li>
             <li><a href="Clientes.jsp"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
             <li><a href="#"><i class="fa fa-money"></i> <span>Modulo Caja</span></a></li>
+            
             <li class="treeview">
                 <a href="#"><i class="fa fa-bank"></i> <span>Habitaciones</span>
                     <span class="pull-right-container">
@@ -90,9 +94,12 @@
                 <ul class="treeview-menu">
                     <li><a href="habitaciones.jsp" >Habitacion</a></li>
                     <li><a href="niveles.jsp">Niveles</a></li>
-                    <li><a href="#">Tipos</a></li>
+                    <li><a href="tipohabitacion.jsp">Tipos</a></li>
+                    <li><a href="estadohabitacion.jsp">Estados</a></li>
                 </ul>
             </li>
+            <% if(T.getCod_temp() == 1){ %>  
+               
 
             <li class="treeview">
                 <a href="#"><i class="fa fa-cog"></i> <span>Administracion</span>
@@ -101,12 +108,15 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="Empleados.jsp">Empleados</a></li>
+                    <li><a href="empleados.jsp">Empleados</a></li>
                     <li><a href="#">Forma de Pago</a></li>
-                    <li><a href="TiposEmpleados.jsp">Tipo de Empleado</a></li>
+                    <li><a href="tipoempleado.jsp">Tipo de Empleado</a></li>
+                    <li><a href="documentoscliente.jsp">Documento de Cliente</a></li>
 
                 </ul>
             </li>
+            
+             <%}%>
         </ul>
     </section>
     <!-- /.sidebar -->

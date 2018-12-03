@@ -2,20 +2,20 @@
 <%@page import="dao.Consultas"%>
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
-
 <% if (E != null) { %>   
-<%@page import="dao.ClienteDAO"%>
-<%@page import="dao.TipoDocDAO"%>
-<%@page import="model.Cliente"%>
-<%@page import="model.DocumentoCliente"%>
-
+<%@page import="dao.EstadoHabitacionDAO"%>
+<%@page import="model.EstadoHabitacion"%>
+<%@page import="dao.NivelDAO"%>
+<%@page import="model.Niveles"%>
+<%@page import="dao.TipoHabitacionDAO"%>
+<%@page import="model.TipoHabitacion"%>
+<%@page import="dao.HabitacionDAO"%>
+<%@page import="model.Habitacion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <jsp:include page="../html/head.jsp" />
-
-
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -26,13 +26,13 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        CLIENTES 
-                        <small>Lista Completa</small>
+                        HABITACIONES
+                        <small>Lista Habitaciones</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                        <li><a href="#">Cliente</a></li>
-                        <li class="active">Lista Clientes</li>
+                        <li><a href="#">Habitaciones</a></li>
+                        <li class="active">Lista Habitaciones</li>
                     </ol>
                 </section>
 
@@ -46,47 +46,42 @@
 
                                 <div class="box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Vista General de Clientes </h3>
+                                        <h3 class="box-title">Vista General de Habitaciones</h3>
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        <table style="table-layout:fixed" id="example3" class="table table-bordered table-striped">
+                                        <table style="table-layout: fixed;"  id="example3" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-primary" border="1">
                                                     <th>CODIGO</th>
-                                                    <th>NOMBRES</th>
-                                                    <th>APELLIDOS </th>
-                                                    <th>RASON SOCIAL</th>
-                                                    <th>TIPO DOCUMENTO</th>
-                                                    <th>DOCUMENTO</th>
-                                                    <th>DIRECCION</th>
-                                                    <th>TELEFONO</th>
-                                                    <th>EMAIL</th>
-                                                    <th width="70">ACCIONES</th>
-
+                                                    <th>NUMERO</th>
+                                                    <th>PRECIO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>TIPO HABITACION</th>
+                                                    <th>NIVEL</th>
+                                                    <th>ESTADO</th>
+                                                    <th width="70" >ACCIONES</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%for (Cliente Cli : ClienteDAO.listarClientes()) {%> 
+                                                <%for (Habitacion hab : HabitacionDAO.ListaHabitacion()) {%> 
                                                 <tr>
-                                                    <td width='5'><%= Cli.getCod_cliente()%></td>
-                                                    <td width='5'><%= Cli.getNombres()%></td>
-                                                    <td width='5'><%= Cli.getApellidos()%></td>
-                                                    <td width='5'><%= Cli.getRasonsocial()%></td>
-                                                    <td width='5'><%= TipoDocDAO.getDoc(Cli.getTipo_doc())%></td>
-                                                    <td width='5'><%= Cli.getDocumento()%></td> 
-                                                    <td width='5'><%= Cli.getDireccion()%></td>
-                                                    <td width='5'><%= Cli.getFono()%></td>
-                                                    <td width='5'><%= Cli.getEmail()%></td>                                             
+                                                    <td width='5'><%= hab.getCod_habitacion()%></td>
+                                                    <td width='5'><%= hab.getNumero()%></td>
+                                                    <td width='5'><%= hab.getPrecio()%></td>
+                                                    <td width='5'><%= hab.getDescripcion()%></td>
+                                                    <td width='5'><%= TipoHabitacionDAO.getTipo(hab.getCod_tipoh()) %></td>
+                                                    <td width='5'><%= NivelDAO.getPiso(hab.getCod_nivel()) %></td>
+                                                    <td width='5'><%= EstadoHabitacionDAO.getEstado(hab.getCod_estado()) %></td>
                                                     <td> 
 
-                                                        <a href="#?cod=<%= Cli.getCod_cliente()%>">
+                                                        <a href="#?cod=<%= hab.getCod_habitacion()%>">
                                                             <button type="button" class="btn btn-success btn-sm">
                                                                 <span Class="glyphicon glyphicon-edit"></span>
                                                             </button>
                                                         </a>
 
-                                                        <a href="#?cod=<%= Cli.getCod_cliente()%>">
+                                                        <a href="../ServEliminahabitacion?cod=<%= hab.getCod_habitacion()%>">
                                                             <button type="button" class="btn btn-danger btn-sm">
                                                                 <span Class="glyphicon glyphicon-trash"></span>
                                                             </button>
@@ -111,7 +106,7 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <td>
-                                    <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-info">Nuevo Cliente</button>
+                                    <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-info">Nueva Habitacion</button>
                                 </td>
                             </div>
                         </div>  
@@ -123,74 +118,63 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Registrar Cliente</h4>
+                                    <h4 class="modal-title">Registrar Habitacion</h4>
                                 </div>
-                                <form action="../ServIngresaCliente" method="POST">
+                                <form action="../Servlethabitacion" method="POST">
                                     <div class="modal-body">
-
                                         <table class="table">
-                                            <tr>
+                                              <tr>
                                                 <td>
-                                                    <label for="">Nombres : </label>
-                                                    <input type="text" class="form-control" name="nom"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Apellidos : </label>
-                                                    <input type="text" class="form-control" name="ape"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Rason Social : </label>
-                                                    <input type="text" class="form-control" name="raz"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Tipo Documento : </label>
-                                                    <select class="form-control"  name="tip" >
-                                                        <option value="">-- Selecciona Documento --</option>
-                                                        <%for (DocumentoCliente tip : TipoDocDAO.ListarDoc()) {%> 
-                                                        <option value="<%= tip.getCod_tipodoc()%>"> <%= tip.getTipodocum()%></option>
-                                                        <%}%> 
+                                                    <label for="">Piso : </label>
+                                                    <select class="form-control" name="niv">
+                                                        <option value="">-- Selecciona Nivel --</option>
+                                                        <%for (Niveles niv : NivelDAO.listarniveles()) {%>
+                                                        <option value="<%= niv.getCod_nivel()%>"><%= niv.getNom_nivel()%></option>
+                                                        <%}%>
                                                     </select>
                                                 </td> 
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="">Nro Documento : </label>
-                                                    <input type="text" class="form-control" name="nro"> 
+                                                    <label for="">Numero : </label>
+                                                    <input type="text" class="form-control" name="num" required> 
                                                 </td> 
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="">Direccion : </label>
-                                                    <input type="text" class="form-control" name="dir"> 
+                                                    <label for="">Precio : </label>
+                                                    <input type="number" class="form-control" name="pre" required> 
                                                 </td> 
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="">Telefono : </label>
-                                                    <input type="text" class="form-control" name="tel"> 
+                                                    <label for="">Descripcion : </label>
+                                                    <input type="text" class="form-control" name="des" required> 
                                                 </td> 
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="">Email : </label>
-                                                    <input type="email" class="form-control" name="ema"> 
+                                                    <label for="">Tipo Habitacion : </label>
+                                                    <select class="form-control"  name="tip" >
+                                                        <option value="">-- Selecciona Tipo --</option>
+                                                        <%for (TipoHabitacion th : TipoHabitacionDAO.ListaTipoHAbitacion()) {%> 
+                                                        <option value="<%= th.getCod_tipoh()%>"> <%= th.getTipo_habitacion()%></option>
+                                                        <%}%> 
+                                                    </select>
                                                 </td> 
                                             </tr>
+                                        
                                         </table>
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
                                         <button type="submit" class="btn btn-outline">Guardar</button>
                                     </div>
-                                </form>                  
+                                </form>
                             </div>
-                            </form>
+
                         </div>
                     </div>
 
@@ -200,7 +184,7 @@
                 <!-- /.content -->
 
             </div>
-            <jsp:include page="../html/footer.jsp" />
+                                                        <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />
         <script>
@@ -217,6 +201,7 @@
             });</script>  
     </body>
 </html>
+
 <% } else {
         response.sendRedirect("../index.jsp");
     }%>

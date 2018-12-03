@@ -74,29 +74,26 @@ public class Servlethabitacion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String tipohabitacion = request.getParameter("thab");
-        String nivel = request.getParameter("niv");
         String numero = request.getParameter("num");
-        String observacion = request.getParameter("obs");
-        String disponible = request.getParameter("dis");
-        String reservado = request.getParameter("res");
-
+        float precio = Float.parseFloat(request.getParameter("pre"));
+        String descripcion = request.getParameter("des");
+        String tipo_habitacion = request.getParameter("tip");
+        String nivel = request.getParameter("niv");
+    
         model.Habitacion hab = new model.Habitacion();
-        
-        hab.setCod_tipohabitacion(tipohabitacion);
-        hab.setCod_nivel(nivel);
         hab.setNumero(numero);
-        hab.setObservaciones(observacion);
-        hab.setDisponible(disponible);
-        hab.setReserva(reservado);
-          if(dao.HabitacionDAO.registrarhabitacion(hab)){
-            request.setAttribute("mensaje","habitacion registrada");
-        }else{
-            request.setAttribute("mensaje","Error al registrar Habitacion");
-        }
-        request.getRequestDispatcher("Registrahabitacion.jsp").forward(request, response);
+        hab.setPrecio(precio);
+        hab.setDescripcion(descripcion);
+        hab.setCod_tipoh(tipo_habitacion);
+        hab.setCod_nivel(nivel);     
         
-        processRequest(request, response);
+          if(dao.HabitacionDAO.RegistrarHabitacion(hab)){
+            request.setAttribute("mensaje","Habitacion REGISTRADA");
+        }else{
+            request.setAttribute("mensaje","ERROR al Registrar Habitacion");
+        }
+        response.sendRedirect("vistas/habitaciones.jsp");
+    
     }
 
     @Override

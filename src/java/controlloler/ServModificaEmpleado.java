@@ -73,34 +73,34 @@ public class ServModificaEmpleado extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String codigo = request.getParameter("cod");
-        String nombre = request.getParameter("nom");
-        String apepar = request.getParameter("ape");
-        String apemar = request.getParameter("ame");
+        String nombres = request.getParameter("nom");
+        int cod_tipoempleado = Integer.parseInt(request.getParameter("tem"));
+        String apellido = request.getParameter("ape");
+        String dni = request.getParameter("dni");
+        String usuario = request.getParameter("usu");
+        String password = request.getParameter("pas");
         String telefono = request.getParameter("tel");
-        String correo = request.getParameter("email");
-        String temp = request.getParameter("tem");
-        String usuario = request.getParameter("uss");
-        String clave = request.getParameter("pass");
-        String estado = request.getParameter("est");
+        String email = request.getParameter("ema");
+        int estado = Integer.parseInt(request.getParameter("est"));
         
         model.Empleados emp = new model.Empleados();
-        emp.setCod_empleado(codigo);
-        emp.setNombres(nombre);
-        /*emp.setAppaterno(apepar);
-        emp.setApmaterno(apemar); */
-        emp.setFono(telefono);
-        emp.setEmail(correo);
-        emp.setCod_tipoempleado(temp);
-        emp.setUsuario(usuario);
-        emp.setClave(clave);
+        emp.setCod_empleados(codigo);
+        emp.setNombres(nombres);
+        emp.setCod_tipoem(cod_tipoempleado);
+        emp.setApellidos(apellido);
+        emp.setDni(dni);
+        emp.setUsername(usuario);
+        emp.setPassword(password);
+        emp.setTelefono(telefono);
+        emp.setEmail(email);
         emp.setEstado(estado);
         
-        if (dao.EmpleadosDAO.ModificaEmpleado(emp)) {
-            request.setAttribute("mensaje", "Empleado Modificado");
+        if (dao.EmpleadosDAO.ModificarEmpleados(emp)) {
+            request.setAttribute("mensaje", "Modificado CORRECTAMENTE");
         } else {
-            request.setAttribute("mensaje", "Error al Modificar Empleado");
+            request.setAttribute("mensaje", "ERROR al Modificar");
         }
-        request.getRequestDispatcher("ModificaEmpleado.jsp").forward(request, response);
+        response.sendRedirect("vistas/empleados.jsp");
         
     }
     

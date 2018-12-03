@@ -4,48 +4,48 @@ import java.io.Serializable;
 
 public class Empleados implements Serializable {
 
-    private String cod_empleado;
+    private String cod_empleados;
     private String nombres;
-    private String cod_tipoempleado;
     private String apellidos;
     private String dni;
-    private String usuario;
-    private String clave;
-    private String fono;
+    private String username;
+    private String password;
+    private String telefono;
     private String email;
-    private String estado;
+    private int estado;
+    private int cod_tipoem;
 
     public Empleados() {
-        this.cod_empleado = "";
         this.nombres = "";
-        this.apellidos = "";   
-        this.fono = "";
+        this.apellidos = "";
+        this.dni = "";
+        this.username = "";
+        this.password = "";
+        this.telefono = "";
         this.email = "";
-        this.cod_tipoempleado = "";
-        this.usuario = "";
-        this.clave = "";
-        this.estado = "";
+        this.estado = 0;
+        this.cod_tipoem = 0;
     }
 
-    public Empleados(String cod_empleado, String nombres, String cod_tipoempleado, String apellidos, String dni, String usuario, String clave, String fono, String email, String estado) {
-        this.cod_empleado = cod_empleado;
+    public Empleados(String cod_empleados, String nombres, String apellidos, String dni, String username, String password, String telefono, String email, int estado, int cod_tipoem) {
+        this.cod_empleados = cod_empleados;
         this.nombres = nombres;
-        this.cod_tipoempleado = cod_tipoempleado;
         this.apellidos = apellidos;
         this.dni = dni;
-        this.usuario = usuario;
-        this.clave = clave;
-        this.fono = fono;
+        this.username = username;
+        this.password = password;
+        this.telefono = telefono;
         this.email = email;
         this.estado = estado;
+        this.cod_tipoem = cod_tipoem;
     }
 
-    public String getCod_empleado() {
-        return cod_empleado;
+    public String getCod_empleados() {
+        return cod_empleados;
     }
 
-    public void setCod_empleado(String cod_empleado) {
-        this.cod_empleado = cod_empleado;
+    public void setCod_empleados(String cod_empleados) {
+        this.cod_empleados = cod_empleados;
     }
 
     public String getNombres() {
@@ -54,14 +54,6 @@ public class Empleados implements Serializable {
 
     public void setNombres(String nombres) {
         this.nombres = nombres;
-    }
-
-    public String getCod_tipoempleado() {
-        return cod_tipoempleado;
-    }
-
-    public void setCod_tipoempleado(String cod_tipoempleado) {
-        this.cod_tipoempleado = cod_tipoempleado;
     }
 
     public String getApellidos() {
@@ -80,28 +72,28 @@ public class Empleados implements Serializable {
         this.dni = dni;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getClave() {
-        return clave;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getFono() {
-        return fono;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setFono(String fono) {
-        this.fono = fono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEmail() {
@@ -112,13 +104,22 @@ public class Empleados implements Serializable {
         this.email = email;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public int getCod_tipoem() {
+        return cod_tipoem;
+    }
+
+    public void setCod_tipoem(int cod_tipoem) {
+        this.cod_tipoem = cod_tipoem;
+    }
+
     
-    
+
 }

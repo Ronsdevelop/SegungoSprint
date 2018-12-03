@@ -12,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.EstadoHabitacion;
 
 /**
  *
  * @author Richard
  */
-@WebServlet(name = "Servleteliminarnivel", urlPatterns = {"/Servleteliminarnivel"})
-public class Servleteliminarnivel extends HttpServlet {
+@WebServlet(name = "ServModificaEstadoHabitacion", urlPatterns = {"/ServModificaEstadoHabitacion"})
+public class ServModificaEstadoHabitacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class Servleteliminarnivel extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servleteliminarnivel</title>");            
+            out.println("<title>Servlet ServModificaEstadoHabitacion</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servleteliminarnivel at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServModificaEstadoHabitacion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,19 +59,19 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigo=request.getParameter("cod");
-        model.Niveles niv=new model.Niveles();
-        niv.setCod_nivel(codigo);
-        if(dao.NivelDAO.eliminanivel(niv))
-        {
-           request.setAttribute("mensaje","Nivel ELIMINADO");
+        String cod = request.getParameter("cod");
+        String estado_habitacion = request.getParameter("est");
+        EstadoHabitacion est = new EstadoHabitacion();
+        est.setCod_estado(cod);
+        est.setEstado_habitacion(estado_habitacion);
+        if (dao.EstadoHabitacionDAO.ModificarEstadoHabitacion(est)) {
+            request.setAttribute("mensaje", "Modificado CORRECTAMENTE");
+        } else {
+            request.setAttribute("mensaje", "ERROR al Modificar");
         }
-        else{
-            request.setAttribute("mensaje","ERROR al Eliminar");
-        }
-        response.sendRedirect("vistas/niveles.jsp");
-    
+        response.sendRedirect("vistas/estadohabitacion.jsp");
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

@@ -73,5 +73,25 @@ public class TipoDocDAO {
         }
 
     }
+    
+    
+    public static boolean ModificaTipoDocumento(DocumentoCliente Doc){
+          try {
+            CallableStatement cs = null;
+            Connection con = dao.Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement("{call sp_ActualizaDocCliente(?,?)}");
+            ps.setString(1, Doc.getCod_tipodoc());
+            ps.setString(2, Doc.getTipodocum());      
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+
+        }
+        return false; 
+    }
 
 }

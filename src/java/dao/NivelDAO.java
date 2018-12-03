@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.CallableStatement;
@@ -9,11 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NivelDAO {
+
     public static boolean registrarNivel(model.Niveles n) {
         try {
             CallableStatement cs = null;
             Connection con = Conexion.conectar();
-            PreparedStatement sp = con.prepareStatement("{call sp_ingresanivel(?)}");
+            PreparedStatement sp = con.prepareStatement("{call sp_IngresaNivel(?)}");
             sp.setString(1, n.getNom_nivel());
             if (sp.executeUpdate() > 0) {
                 return true;
@@ -24,9 +24,10 @@ public class NivelDAO {
             return false;
         }
     }
-public static ArrayList<model.Niveles> listarniveles() {
+
+    public static ArrayList<model.Niveles> listarniveles() {
         try {
-            String SQL = "select * from niveles";
+            String SQL = "select * from nivel";
             Connection con = Conexion.conectar();
             PreparedStatement st = con.prepareCall(SQL);
             ResultSet resultado = st.executeQuery();
@@ -35,8 +36,8 @@ public static ArrayList<model.Niveles> listarniveles() {
             while (resultado.next()) {
                 niv = new model.Niveles();
                 niv.setCod_nivel(resultado.getString("cod_nivel"));
-                niv.setNom_nivel(resultado.getString("nom_nivel"));
-                
+                niv.setNom_nivel(resultado.getString("piso"));
+
                 lista.add(niv);
             }
             return lista;
@@ -49,7 +50,7 @@ public static ArrayList<model.Niveles> listarniveles() {
         try {
             CallableStatement cs = null;
             Connection con = Conexion.conectar();
-            CallableStatement sp = con.prepareCall("{call sp_eliminanivel(?)}");
+            CallableStatement sp = con.prepareCall("{call sp_EliminaNivel(?)}");
             sp.setString(1, niv.getCod_nivel());
             if (sp.executeUpdate() > 0) {
                 return true;
@@ -62,16 +63,16 @@ public static ArrayList<model.Niveles> listarniveles() {
     }
 
     public static model.Niveles getIdnivel(String id) throws SQLException {
-       model.Niveles niv = new model.Niveles();
+        model.Niveles niv = new model.Niveles();
         try {
             Connection con = dao.Conexion.conectar();
-            PreparedStatement ps = con.prepareStatement("select * from niveles where cod_nivel=?");
+            PreparedStatement ps = con.prepareStatement("select * from nivel where cod_nivel=?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 niv.setCod_nivel(rs.getString(1));
                 niv.setNom_nivel(rs.getString(2));
-                
+
                 con.close();
 
             }
@@ -80,17 +81,18 @@ public static ArrayList<model.Niveles> listarniveles() {
         }
         return niv;
     }
-public static boolean modificarNivel(model.Niveles niv) {
+
+    public static boolean modificarNivel(model.Niveles niv) {
         try {
-            CallableStatement cs=null;
+            CallableStatement cs = null;
             Connection con = dao.Conexion.conectar();
-            PreparedStatement ps = con.prepareStatement("{call sp_modificanivel(?,?)}");
-            ps.setString(1,niv.getCod_nivel());
-            ps.setString(2,niv.getNom_nivel());
-           
-            if (ps.executeUpdate()>0) {
+            PreparedStatement ps = con.prepareStatement("{call sp_ActualizaNivel(?,?)}");
+            ps.setString(1, niv.getCod_nivel());
+            ps.setString(2, niv.getNom_nivel());
+
+            if (ps.executeUpdate() > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } catch (SQLException ex) {
@@ -99,5 +101,22 @@ public static boolean modificarNivel(model.Niveles niv) {
         return false;
     }
 
-}
+    public static String getPiso(String cod) {
+        try {
+            CallableStatement cs = null;
+            Connection con = dao.Conexion.conectar();
+           String consulta = ("SELECT piso FROM nivel WHERE cod_nivel = ?");
+           PreparedStatement ps = con.prepareStatement(consulta);
+            ps.setString(1, cod);
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                return res.getString("piso");
+            }
+            return "--";
+        } catch (Exception e) {
+            return "--";
+        }
 
+    }
+
+}

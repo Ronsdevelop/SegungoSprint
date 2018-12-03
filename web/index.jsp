@@ -4,8 +4,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" href="/struts/xhtml/styles.css" type="text/css"/>
-        <script src="/struts/utils.js" type="text/javascript"></script>
+      
+       
         <link rel="stylesheet" href="css/style-index.css" />
         <title>Las Americas Hotel</title>
     </head>
@@ -26,7 +26,7 @@
                                     <table class="wwFormTable">
                                         <div>
                                             <div>
-                                                <div class="">
+                                                <div >
                                                     <tr>
                                                         <td class="tdLabel"><label for="login_usuariologueado_codigo" class="label">Usuario:</label></td>
                                                         <td
@@ -34,7 +34,7 @@
                                                     </tr>
 
                                                 </div>
-                                                <div class="">
+                                                <div >
                                                     <tr>
                                                         <td class="tdLabel"><label for="login_usuariologueado_contrasena" class="label">Contraseña:</label></td>
                                                         <td

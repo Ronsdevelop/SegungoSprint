@@ -14,31 +14,29 @@ import java.io.Serializable;
 public class Habitacion implements Serializable {
 
     private String cod_habitacion;
-    private String cod_tipohabitacion;
-    private String cod_nivel;
     private String numero;
-    private String observaciones;
-    private String disponible;
-    private String reserva;
+    private float precio;
+    private String descripcion;
+    private String cod_tipoh;
+    private String cod_nivel;
+    private String cod_estado;
 
     public Habitacion() {
-        this.cod_habitacion = "";
-        this.cod_tipohabitacion = "";
-        this.cod_nivel = "";
         this.numero = "";
-        this.observaciones = "";
-        this.disponible = "";
-        this.reserva = "";
+        this.precio = 0;
+        this.descripcion = "";
+        this.cod_tipoh = "";
+        this.cod_nivel = "";
+        this.cod_estado = "";
     }
 
-    public Habitacion(String cod_habitacion, String cod_tipohabitacion, String cod_nivel, String numero, String observaciones, String disponible, String reserva) {
-        this.cod_habitacion = cod_habitacion;
-        this.cod_tipohabitacion = cod_tipohabitacion;
-        this.cod_nivel = cod_nivel;
+    public Habitacion(String numero, float precio, String descripcion, String cod_tipoh, String cod_nivel, String cod_estado) {
         this.numero = numero;
-        this.observaciones = observaciones;
-        this.disponible = disponible;
-        this.reserva = reserva;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.cod_tipoh = cod_tipoh;
+        this.cod_nivel = cod_nivel;
+        this.cod_estado = cod_estado;
     }
 
     public String getCod_habitacion() {
@@ -49,12 +47,36 @@ public class Habitacion implements Serializable {
         this.cod_habitacion = cod_habitacion;
     }
 
-    public String getCod_tipohabitacion() {
-        return cod_tipohabitacion;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setCod_tipohabitacion(String cod_tipohabitacion) {
-        this.cod_tipohabitacion = cod_tipohabitacion;
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getCod_tipoh() {
+        return cod_tipoh;
+    }
+
+    public void setCod_tipoh(String cod_tipoh) {
+        this.cod_tipoh = cod_tipoh;
     }
 
     public String getCod_nivel() {
@@ -65,36 +87,12 @@ public class Habitacion implements Serializable {
         this.cod_nivel = cod_nivel;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getCod_estado() {
+        return cod_estado;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public String getDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(String disponible) {
-        this.disponible = disponible;
-    }
-
-    public String getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(String reserva) {
-        this.reserva = reserva;
+    public void setCod_estado(String cod_estado) {
+        this.cod_estado = cod_estado;
     }
 
 }

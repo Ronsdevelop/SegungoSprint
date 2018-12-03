@@ -1,8 +1,8 @@
 
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
-<% if (E != null) { %>  
-
+<% if (E != null) {%>  
+<%@page import="dao.HabitacionDAO"%>
 <%@page import="model.Empleados"%>
 <%@page import="dao.ClienteDAO"%>
 <%@page import="model.Cliente"%>
@@ -36,64 +36,77 @@
                     <!-- CONTENIDO DE LA PAGINA -->
 
                     <div class="row panel_modulos">
-                        <div class="col-md-3">
-                            <!-- Info Boxes Style 2 -->
-                            <div class="info-box bg-yellow">
-                                <span class="info-box-icon"><i class="fa fa-hotel"></i></span>
+                        <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h3><%= HabitacionDAO.CantHabitacion()%></h3>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Habitaciones</span>
-                                    <span class="info-box-number">15</span>
-
+                                        <p>Habitaciones</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-hotel"></i>
+                                    </div>
+                                    <a href="habitaciones.jsp" class="small-box-footer">
+                                        Mas info <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <!-- /.info-box-content -->
-                            </div>                      
+                            </div>
+                      <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3><%= HabitacionDAO.HabReservadas()%></h3>
 
-                        </div>
-                        <div class="col-md-3">
-                            <!-- Info Boxes Style 2 -->
-                            <div class="info-box bg-green">
-                                <span class="info-box-icon"><i class="fa fa-hotel"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Habitaciones</span>
-                                    <span class="info-box-number">15</span>
-
+                                        <p>Reservadas</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-hotel"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                        Mas info <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <!-- /.info-box-content -->
-                            </div>                      
+                            </div>
+                        <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3><%= HabitacionDAO.HabOcupadas()%></h3>
 
-                        </div>
-                        <div class="col-md-3">
-                            <!-- Info Boxes Style 2 -->
-                            <div class="info-box bg-aqua-gradient">
-                                <span class="info-box-icon"><i class="fa fa-hotel"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Habitaciones</span>
-                                    <span class="info-box-number">15</span>
-
+                                        <p>Ocupadas</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-hotel"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                        Mas info <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <!-- /.info-box-content -->
-                            </div>                      
+                            </div>
 
-                        </div>
+                            <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-light-blue">
+                                    <div class="inner">
+                                        <h3><%= HabitacionDAO.HabDisponibles()%></h3>
 
-                        <div class="col-md-3">
-                            <!-- Info Boxes Style 2 -->
-                            <div class="info-box bg-fuchsia-active">
-                                <span class="info-box-icon"><i class="fa fa-hotel"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Habitaciones</span>
-                                    <span class="info-box-number">15</span>
-
+                                        <p>Disponibles</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-hotel"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                        Mas info <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <!-- /.info-box-content -->
-                            </div>                      
+                            </div>
 
-                        </div> 
+
+                     
                     </div>
+
+
 
 
 
@@ -109,8 +122,8 @@
                             <div class="box">
                                 <div class="box-header with-border">
                                     <h3 class="box-title">HABITACIONES OCUPADAS</h3>
-                                    
-                                  
+
+
 
 
                                 </div>

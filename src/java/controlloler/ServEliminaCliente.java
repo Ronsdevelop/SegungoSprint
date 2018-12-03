@@ -63,12 +63,12 @@ public class ServEliminaCliente extends HttpServlet {
         cli.setCod_cliente(codigo);
         if(dao.ClienteDAO.eliminacliente(cli))
         {
-           request.setAttribute("elimina","cliente eliminado correctamente");
+           request.setAttribute("mensaje","Eliminado CORRECTAMENTE");
         }
         else{
-            request.setAttribute("elimina","no se pudo eliminar");
+            request.setAttribute("mensaje","ERROR al Eliminar");
         }
-        request.getRequestDispatcher("Clientes.jsp").forward(request, response);
+        response.sendRedirect("vistas/Clientes.jsp");
     
     
     }

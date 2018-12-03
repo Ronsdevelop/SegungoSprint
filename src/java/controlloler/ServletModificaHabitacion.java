@@ -73,28 +73,29 @@ public class ServletModificaHabitacion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String codigo = request.getParameter("cod");
-        String thab = request.getParameter("thab");
-        String niv = request.getParameter("niv");
-        String num = request.getParameter("num");
-        String obs = request.getParameter("obs");
-        String dis = request.getParameter("dis");
-        String res = request.getParameter("res");
+        String numero = request.getParameter("num");
+        float precio = Float.parseFloat(request.getParameter("pre"));
+        String descripcion = request.getParameter("des");
+        String tipo_habitacion = request.getParameter("tip");
+        String nivel = request.getParameter("niv");
+        String estado_habitacion = request.getParameter("est");
         
         model.Habitacion hab = new model.Habitacion();
         hab.setCod_habitacion(codigo);
-        hab.setCod_tipohabitacion(thab);
-        hab.setCod_nivel(niv);
-        hab.setNumero(num);
-        hab.setObservaciones(obs);
-        hab.setDisponible(dis);
-        hab.setReserva(res);
+        hab.setNumero(numero);
+        hab.setPrecio(precio);
+        hab.setDescripcion(descripcion);
+        hab.setCod_tipoh(tipo_habitacion);
+        hab.setCod_nivel(nivel);
+        hab.setCod_estado(estado_habitacion);
+                
 
-        if (dao.HabitacionDAO.Modificahabitacion(hab)) {
-            request.setAttribute("mensaje", "Cliente Modificado");
+        if (dao.HabitacionDAO.ModificarHabitacion(hab)) {
+            request.setAttribute("mensaje", "Modificado CORRECTAMENTE");
         } else {
-            request.setAttribute("mensaje", "Error al Modificar Cliente");
+            request.setAttribute("mensaje", "ERROR al Modificar");
         }
-        request.getRequestDispatcher("Habitaciones.jsp").forward(request, response);
+        response.sendRedirect("vistas/habitaciones.jsp");
 
     
 }

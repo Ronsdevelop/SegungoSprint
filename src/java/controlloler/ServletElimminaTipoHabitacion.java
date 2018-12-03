@@ -12,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.TipoHabitacion;
 
 /**
  *
  * @author Richard
  */
-@WebServlet(name = "Servleteliminarnivel", urlPatterns = {"/Servleteliminarnivel"})
-public class Servleteliminarnivel extends HttpServlet {
+@WebServlet(name = "ServletElimminaTipoHabitacion", urlPatterns = {"/ServletElimminaTipoHabitacion"})
+public class ServletElimminaTipoHabitacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class Servleteliminarnivel extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servleteliminarnivel</title>");            
+            out.println("<title>Servlet ServletElimminaTipoHabitacion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servleteliminarnivel at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletElimminaTipoHabitacion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,19 +59,17 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigo=request.getParameter("cod");
-        model.Niveles niv=new model.Niveles();
-        niv.setCod_nivel(codigo);
-        if(dao.NivelDAO.eliminanivel(niv))
-        {
-           request.setAttribute("mensaje","Nivel ELIMINADO");
+        String cod=request.getParameter("cod");
+        model.TipoHabitacion th=new TipoHabitacion();
+        th.setCod_tipoh(cod);
+        if (dao.TipoHabitacionDAO.EliminarTipoHabitacion(th)) {
+         request.setAttribute("mensaje", "Eliminado CORRECTAMENTE");
+        }else{
+            request.setAttribute("mensaje", "ERROR al  Elimininar");
         }
-        else{
-            request.setAttribute("mensaje","ERROR al Eliminar");
-        }
-        response.sendRedirect("vistas/niveles.jsp");
-    
+       response.sendRedirect("vistas/tipohabitacion.jsp");
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

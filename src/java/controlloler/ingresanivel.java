@@ -72,7 +72,7 @@ public class ingresanivel extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          String Nivel = request.getParameter("nivel");
+          String Nivel = request.getParameter("niv");
           
           model.Niveles n = new model.Niveles();
           n.setNom_nivel(Nivel);
@@ -81,9 +81,9 @@ public class ingresanivel extends HttpServlet {
         }else{
             request.setAttribute("mensaje","Error al registrar Nivel");
         }
-        request.getRequestDispatcher("ingresanivel.jsp").forward(request, response);
+        response.sendRedirect("vistas/niveles.jsp");
         
-        processRequest(request, response);
+  
     }
 
     /**

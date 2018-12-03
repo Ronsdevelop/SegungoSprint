@@ -82,11 +82,11 @@ public class Servletmodificanivel extends HttpServlet {
         
         
         if (dao.NivelDAO.modificarNivel(niv)) {
-            request.setAttribute("mensaje", "Nivel Modificado");
+            request.setAttribute("mensaje", "Nivel MODIFICADO");
         } else {
-            request.setAttribute("mensaje", "Error al Modificar Nivel");
+            request.setAttribute("mensaje", "ERROR al Modificar");
         }
-        request.getRequestDispatcher("Niveles.jsp").forward(request, response);
+        response.sendRedirect("vistas/niveles.jsp");
         
     }
     @Override

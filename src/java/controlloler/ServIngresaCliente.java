@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Richard
  */
-@WebServlet(name = "Servleteliminarnivel", urlPatterns = {"/Servleteliminarnivel"})
-public class Servleteliminarnivel extends HttpServlet {
+@WebServlet(name = "ServIngresaCliente", urlPatterns = {"/ServIngresaCliente"})
+public class ServIngresaCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class Servleteliminarnivel extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servleteliminarnivel</title>");            
+            out.println("<title>Servlet ServIngresaCliente</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servleteliminarnivel at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServIngresaCliente at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,19 +58,9 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigo=request.getParameter("cod");
-        model.Niveles niv=new model.Niveles();
-        niv.setCod_nivel(codigo);
-        if(dao.NivelDAO.eliminanivel(niv))
-        {
-           request.setAttribute("mensaje","Nivel ELIMINADO");
-        }
-        else{
-            request.setAttribute("mensaje","ERROR al Eliminar");
-        }
-        response.sendRedirect("vistas/niveles.jsp");
-    
+        processRequest(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -82,7 +72,30 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String nombres = request.getParameter("nom");
+        String apellido = request.getParameter("ape");
+        String razon_social = request.getParameter("raz");
+        String tipo_doc = request.getParameter("tip");
+        String nro_documento = request.getParameter("nro");
+        String direccion = request.getParameter("dir");
+        String telefono = request.getParameter("tel");
+        String email = request.getParameter("ema");
+        model.Cliente cli = new model.Cliente();
+        cli.setNombres(nombres);
+        cli.setApellidos(apellido);
+        cli.setRasonsocial(razon_social);
+        cli.setTipo_doc(tipo_doc);
+        cli.setDocumento(nro_documento);
+        cli.setDireccion(direccion);
+        cli.setFono(telefono);
+        cli.setEmail(email);
+        if (dao.ClienteDAO.RegistrarCliente(cli)) {
+            request.setAttribute("mensaje", "Registrado CORRECTAMENTE");
+        } else {
+            request.setAttribute("mensaje", "ERROR al Registrar");
+        }
+        response.sendRedirect("vistas/Clientes.jsp");
+
     }
 
     /**

@@ -21,23 +21,22 @@ public class Consultas extends Conexion {
         Empleados Em = null;
         if (rs.next()) {
             Em = new Empleados();
-            Em.setCod_empleado(rs.getString(1));
+            Em.setCod_empleados(rs.getString(1));
             Em.setNombres(rs.getString(2));
             Em.setApellidos(rs.getString(3));
-            Em.setCod_tipoempleado(rs.getString(10));
-            
+            Em.setCod_tipoem(rs.getInt(10));            
         }
         con.close();
         return Em;
     }
     
-    public TipoEmpleado getCargo(String cod) throws SQLException {
+    public TipoEmpleado getCargo(int cod) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = Conexion.conectar();
         String Cons = "select * from tipo_empleado where cod_tipoem= ? ";
         ps = con.prepareStatement(Cons);
-        ps.setString(1, cod);
+        ps.setInt(1, cod);
         rs = ps.executeQuery();
         TipoEmpleado Tip = null;
         if (rs.next()) {

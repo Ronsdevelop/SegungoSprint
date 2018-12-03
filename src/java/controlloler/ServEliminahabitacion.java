@@ -58,18 +58,17 @@ public class ServEliminahabitacion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    String codigo=request.getParameter("cod");
-        model.Habitacion hab=new model.Habitacion();
+        String codigo = request.getParameter("cod");
+        model.Habitacion hab = new model.Habitacion();
         hab.setCod_habitacion(codigo);
-        if(dao.HabitacionDAO.eliminahabitacion(hab))
+        if(dao.HabitacionDAO.EliminarHabitacion(hab))
         {
-           request.setAttribute("elimina","cliente eliminado correctamente");
+           request.setAttribute("mensaje","Habitacion ELIMINADA");
         }
         else{
-            request.setAttribute("elimina","no se pudo eliminar");
+            request.setAttribute("mensaje","ERROR al Eliminar");
         }
-        request.getRequestDispatcher("Habitaciones.jsp").forward(request, response);
-    
+        response.sendRedirect("vistas/habitaciones.jsp");
     
     }
     /**

@@ -60,15 +60,15 @@ public class ServEliminaEmpleado extends HttpServlet {
             throws ServletException, IOException {
         String codigo=request.getParameter("cod");
         model.Empleados emp=new model.Empleados();
-        emp.setCod_empleado(codigo);
-        if(dao.EmpleadosDAO.eliminaempleado(emp))
+        emp.setCod_empleados(codigo);
+        if(dao.EmpleadosDAO.EliminarEmpleados(emp))
         {
-           request.setAttribute("elimina","Empleado eliminado correctamente");
+           request.setAttribute("mensaje","Eliminado CORRECTAMENTE");
         }
         else{
-            request.setAttribute("elimina","no se pudo eliminar");
+            request.setAttribute("mensaje","ERROR al Eliminar");
         }
-        request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+        response.sendRedirect("vistas/empleados.jsp");
     
     }
     /**

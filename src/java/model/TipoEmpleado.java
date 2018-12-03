@@ -12,28 +12,28 @@ import java.io.Serializable;
  * @author Rony
  */
 public class TipoEmpleado implements Serializable{
-    private String cod_temp;
+    private int cod_temp;
     private String templeado;
 
 
     public TipoEmpleado() {
-        this.cod_temp = "";
+        this.cod_temp = 0;
         this.templeado = "";
       
     }    
     
 
-    public TipoEmpleado(String cod_temp, String templeado ) {
+    public TipoEmpleado(int cod_temp, String templeado ) {
         this.cod_temp = cod_temp;
         this.templeado = templeado;
       
     }
 
-    public String getCod_temp() {
+    public int getCod_temp() {
         return cod_temp;
     }
 
-    public void setCod_temp(String cod_temp) {
+    public void setCod_temp(int cod_temp) {
         this.cod_temp = cod_temp;
     }
 

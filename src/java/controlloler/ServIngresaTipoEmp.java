@@ -72,19 +72,16 @@ public class ServIngresaTipoEmp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String tipo = request.getParameter("tipo");
-        String des = request.getParameter("des");
+        String tipo_empleo = request.getParameter("tip");
         model.TipoEmpleado tp = new model.TipoEmpleado();
-        tp.setTempleado(tipo);
-        /*tp.setDescripcion(des); */
+        tp.setTempleado(tipo_empleo);    
         if (dao.TEmpleadoDAO.RegistraTipoEmpl(tp)) {
-            request.setAttribute("mensaje", "Cliente Registrado");
+            request.setAttribute("mensaje", "Registrado CORRECTAMENTE");
         }
         else {
-            request.setAttribute("mensaje", "Cliente no registrado");
+            request.setAttribute("mensaje", "ERROR al Registrar");
         }
-        request.getRequestDispatcher("RegistraTipEm.jsp").forward(request, response);
-        processRequest(request, response);
+        response.sendRedirect("vistas/tipoempleado.jsp");
     }
 
     /**

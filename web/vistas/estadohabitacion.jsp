@@ -1,10 +1,8 @@
-<%@page import="model.TipoEmpleado"%>
-<%@page import="dao.Consultas"%>
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
 <% if (E != null) { %>   
-<%@page import="dao.NivelDAO"%>
-<%@page import="model.Niveles"%>
+<%@page import="dao.EstadoHabitacionDAO"%>
+<%@page import="model.EstadoHabitacion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,13 +18,13 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                       NIVELES
-                        <small>Lista Niveles</small>
+                       ESTADO_HABITACION
+                        <small>Lista Estado_Habitacion</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                        <li><a href="#">Niveles</a></li>
-                        <li class="active">Lista Niveles</li>
+                        <li><a href="#">EstadoHabitacion</a></li>
+                        <li class="active">Lista EstadoHabitacion</li>
                     </ol>
                 </section>
 
@@ -40,7 +38,7 @@
 
                                 <div class="box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Vista General de Niveles</h3>
+                                        <h3 class="box-title">Vista General de Estados de Habitacion</h3>
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
@@ -50,24 +48,24 @@
                                             <thead>
                                                 <tr class="bg-primary" border="1">
                                                     <th>CODIGO</th>
-                                                    <th>NIVEL</th>
+                                                    <th>ESTADO</th>
                                                     <th>OPERACIONES</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%for (Niveles th : NivelDAO.listarniveles()) {%> 
+                                                <%for (EstadoHabitacion est : EstadoHabitacionDAO.ListaEstadoHabitacion()) {%> 
                                                 <tr>
-                                                    <td width='5'><%= th.getCod_nivel()%></td>
-                                                    <td width='5'><%= th.getNom_nivel()%></td>
+                                                    <td width='5'><%= est.getCod_estado()%></td>
+                                                    <td width='5'><%= est.getEstado_habitacion()%></td>
                                                     <td> 
 
-                                                        <a href="#?cod=<%= th.getCod_nivel()%>">
+                                                        <a href="#?cod=<%= est.getCod_estado()%>">
                                                             <button type="button" class="btn btn-success btn-sm">
                                                                 <span Class="glyphicon glyphicon-edit"></span>
                                                             </button>
                                                         </a>
 
-                                                        <a href="../Servleteliminarnivel?cod=<%= th.getCod_nivel()%>">
+                                                        <a href="../ServletEliminaEstadoHabitacion?cod=<%= est.getCod_estado()%>">
                                                             <button type="button" class="btn btn-danger btn-sm">
                                                                 <span Class="glyphicon glyphicon-trash"></span>
                                                             </button>
@@ -92,7 +90,7 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <td>
-                                    <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-info">Nuevo Nivel</button>
+                                    <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-info">Nuevo Estado</button>
                                 </td>
                             </div>
                         </div>  
@@ -104,15 +102,15 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Registrar Nivel</h4>
+                                    <h4 class="modal-title">Registrar Estado</h4>
                                 </div>
-                                <form action="../ingresanivel" method="POST">
+                                <form action="../ServletEstadoHabitacion" method="POST">
                                     <div class="modal-body">
                                         <table class="table">
                                             <tr>
                                                 <td>
-                                                    <label for="">Nivel : </label>
-                                                    <input type="text" class="form-control" name="niv" required> 
+                                                    <label for="">Estado : </label>
+                                                    <input type="text" class="form-control" name="est" required> 
                                                 </td> 
                                             </tr>
                                         </table>
@@ -152,7 +150,6 @@
             });</script>  
     </body>
 </html>
-
 
 <% } else {
         response.sendRedirect("../index.jsp");

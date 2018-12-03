@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Richard
  */
-@WebServlet(name = "Servleteliminarnivel", urlPatterns = {"/Servleteliminarnivel"})
-public class Servleteliminarnivel extends HttpServlet {
+@WebServlet(name = "ServletEliminaEstadoHabitacion", urlPatterns = {"/ServletEliminaEstadoHabitacion"})
+public class ServletEliminaEstadoHabitacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class Servleteliminarnivel extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servleteliminarnivel</title>");            
+            out.println("<title>Servlet ServletEliminaEstadoHabitacion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servleteliminarnivel at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletEliminaEstadoHabitacion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,19 +58,19 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigo=request.getParameter("cod");
-        model.Niveles niv=new model.Niveles();
-        niv.setCod_nivel(codigo);
-        if(dao.NivelDAO.eliminanivel(niv))
+       String codigo = request.getParameter("cod");
+        model.EstadoHabitacion est = new model.EstadoHabitacion();
+        est.setCod_estado(codigo);
+        if(dao.EstadoHabitacionDAO.EliminarEstadoHabitacion(est))
         {
-           request.setAttribute("mensaje","Nivel ELIMINADO");
+           request.setAttribute("mensaje","Estado Habitacion ELIMINADA");
         }
         else{
             request.setAttribute("mensaje","ERROR al Eliminar");
         }
-        response.sendRedirect("vistas/niveles.jsp");
-    
+        response.sendRedirect("vistas/estadohabitacion.jsp");
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

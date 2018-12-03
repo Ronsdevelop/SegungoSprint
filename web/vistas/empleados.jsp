@@ -1,13 +1,12 @@
+<%@page import="dao.EmpleadosDAO"%>
 <%@page import="model.TipoEmpleado"%>
 <%@page import="dao.Consultas"%>
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
 
-<% if (E != null) { %>   
-<%@page import="dao.ClienteDAO"%>
-<%@page import="dao.TipoDocDAO"%>
-<%@page import="model.Cliente"%>
-<%@page import="model.DocumentoCliente"%>
+<% if (E != null) { %>  
+<%@page import="dao.TEmpleadoDAO"%>
+<% TEmpleadoDAO T = new TEmpleadoDAO();%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,13 +25,13 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        CLIENTES 
-                        <small>Lista Completa</small>
+                        EMPLEADOS 
+                        <small>Lista Empleados</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                        <li><a href="#">Cliente</a></li>
-                        <li class="active">Lista Clientes</li>
+                        <li><a href="#">Empleados</a></li>
+                        <li class="active">Lista Empleados</li>
                     </ol>
                 </section>
 
@@ -46,47 +45,50 @@
 
                                 <div class="box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Vista General de Clientes </h3>
+                                        <h3 class="box-title">Vista General de Empleados </h3>
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        <table style="table-layout:fixed" id="example3" class="table table-bordered table-striped">
+                                        <table id="example3" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-primary" border="1">
+
                                                     <th>CODIGO</th>
-                                                    <th>NOMBRES</th>
-                                                    <th>APELLIDOS </th>
-                                                    <th>RASON SOCIAL</th>
-                                                    <th>TIPO DOCUMENTO</th>
-                                                    <th>DOCUMENTO</th>
-                                                    <th>DIRECCION</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>TIPO</th>
+                                                    <th>APELLIDO</th>
+                                                    <th>DNI</th>
+                                                    <th>USUARIO</th>
+                                                    <th>PASSWORD</th>
                                                     <th>TELEFONO</th>
                                                     <th>EMAIL</th>
-                                                    <th width="70">ACCIONES</th>
+                                                    <th>ESTADO</th>
+                                                    <th>ACCIONES</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%for (Cliente Cli : ClienteDAO.listarClientes()) {%> 
+                                                <%for (Empleados emp : EmpleadosDAO.ListaEmpleados()) {%> 
                                                 <tr>
-                                                    <td width='5'><%= Cli.getCod_cliente()%></td>
-                                                    <td width='5'><%= Cli.getNombres()%></td>
-                                                    <td width='5'><%= Cli.getApellidos()%></td>
-                                                    <td width='5'><%= Cli.getRasonsocial()%></td>
-                                                    <td width='5'><%= TipoDocDAO.getDoc(Cli.getTipo_doc())%></td>
-                                                    <td width='5'><%= Cli.getDocumento()%></td> 
-                                                    <td width='5'><%= Cli.getDireccion()%></td>
-                                                    <td width='5'><%= Cli.getFono()%></td>
-                                                    <td width='5'><%= Cli.getEmail()%></td>                                             
+                                                    <td width='5'><%= emp.getCod_empleados()%></td>
+                                                    <td width='5'><%= emp.getNombres()%></td>
+                                                    <td width='5'><%=  T.Cod_Tipo(emp.getCod_tipoem()) %></td>
+                                                    <td width='5'><%= emp.getApellidos()%></td>
+                                                    <td width='5'><%= emp.getDni()%></td>
+                                                    <td width='5'><%= emp.getUsername()%></td> 
+                                                    <td width='5'><%= emp.getPassword()%></td>
+                                                    <td width='5'><%= emp.getTelefono()%></td>
+                                                    <td width='5'><%= emp.getEmail()%></td>                                             
+                                                    <td width='5'><%= emp.getEstado()%></td>                                             
                                                     <td> 
 
-                                                        <a href="#?cod=<%= Cli.getCod_cliente()%>">
+                                                        <a href="#?cod=<%= emp.getCod_empleados()%>">
                                                             <button type="button" class="btn btn-success btn-sm">
                                                                 <span Class="glyphicon glyphicon-edit"></span>
                                                             </button>
                                                         </a>
 
-                                                        <a href="#?cod=<%= Cli.getCod_cliente()%>">
+                                                        <a href="../ServEliminaEmpleado?cod=<%= emp.getCod_empleados()%>">
                                                             <button type="button" class="btn btn-danger btn-sm">
                                                                 <span Class="glyphicon glyphicon-trash"></span>
                                                             </button>
@@ -111,7 +113,7 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <td>
-                                    <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-info">Nuevo Cliente</button>
+                                    <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#modal-info">Nuevo Empleado</button>
                                 </td>
                             </div>
                         </div>  
@@ -123,51 +125,51 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Registrar Cliente</h4>
+                                    <h4 class="modal-title">Registrar Empleados</h4>
                                 </div>
-                                <form action="../ServIngresaCliente" method="POST">
+                                <form action="../ServEmpleado" method="POST">
                                     <div class="modal-body">
-
                                         <table class="table">
                                             <tr>
                                                 <td>
-                                                    <label for="">Nombres : </label>
-                                                    <input type="text" class="form-control" name="nom"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Apellidos : </label>
-                                                    <input type="text" class="form-control" name="ape"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Rason Social : </label>
-                                                    <input type="text" class="form-control" name="raz"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Tipo Documento : </label>
-                                                    <select class="form-control"  name="tip" >
-                                                        <option value="">-- Selecciona Documento --</option>
-                                                        <%for (DocumentoCliente tip : TipoDocDAO.ListarDoc()) {%> 
-                                                        <option value="<%= tip.getCod_tipodoc()%>"> <%= tip.getTipodocum()%></option>
+                                                    <label for="#">Tipo_Empleado</label>
+                                                    <select class="form-control"  name="tem" id="">
+                                                        <option value="">-- Selecciona Tipo --</option>
+                                                        <%for (TipoEmpleado TP : TEmpleadoDAO.ListaTiposEm()) {%> 
+                                                        <option value="<%= TP.getCod_temp()%>"> <%= TP.getTempleado()%></option>
                                                         <%}%> 
                                                     </select>
                                                 </td> 
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="">Nro Documento : </label>
-                                                    <input type="text" class="form-control" name="nro"> 
+                                                    <label for="">Nombres : </label>
+                                                    <input type="text" class="form-control" name="nom"> 
+                                                </td> 
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <label for="">Apellido : </label>
+                                                    <input type="text" class="form-control" name="ape"> 
                                                 </td> 
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="">Direccion : </label>
-                                                    <input type="text" class="form-control" name="dir"> 
+                                                    <label for="">Dni : </label>
+                                                    <input type="text" class="form-control" name="dni"> 
+                                                </td> 
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="">Usuario : </label>
+                                                    <input type="text" class="form-control" name="usu"> 
+                                                </td> 
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="">Password : </label>
+                                                    <input type="text" class="form-control" name="pas"> 
                                                 </td> 
                                             </tr>
                                             <tr>
@@ -179,22 +181,32 @@
                                             <tr>
                                                 <td>
                                                     <label for="">Email : </label>
-                                                    <input type="email" class="form-control" name="ema"> 
+                                                    <input type="text" class="form-control" name="ema"> 
+                                                </td> 
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="">Estado</label>
+                                                    <select class="form-control"  name="est">
+                                                        <option value="">-- Selecciona Estado --</option>
+                                                        <option value="1">ACTIVO</option>
+                                                        <option value="0">INACTIVO</option>
+                                                    </select>
                                                 </td> 
                                             </tr>
                                         </table>
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
                                         <button type="submit" class="btn btn-outline">Guardar</button>
                                     </div>
-                                </form>                  
+                                </form>
                             </div>
-                            </form>
+
                         </div>
                     </div>
-
-
                     <!-- /.row -->
                 </section>
                 <!-- /.content -->

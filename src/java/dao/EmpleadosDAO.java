@@ -19,101 +19,117 @@ import model.Empleados;
  */
 public class EmpleadosDAO {
 
-    public static ArrayList<model.Empleados> listarEmpleados() {
+    public static boolean RegistrarEmpleados(model.Empleados emp) {
+        try {
+            CallableStatement cs = null;
+            Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement("{call sp_IngresaEmpleados(?,?,?,?,?,?,?,?,?)}");
+            ps.setString(1, emp.getNombres());
+            ps.setString(2, emp.getApellidos());
+            ps.setString(3, emp.getDni());
+            ps.setString(4, emp.getUsername());
+            ps.setString(5, emp.getPassword());
+            ps.setString(6, emp.getTelefono());
+            ps.setString(7, emp.getEmail());
+            ps.setInt(8, emp.getEstado());
+            ps.setInt(9, emp.getCod_tipoem());
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public static ArrayList<model.Empleados> ListaEmpleados() {
         try {
             String SQL = "select * from empleados";
             Connection con = Conexion.conectar();
-            PreparedStatement st = con.prepareCall(SQL);
-            ResultSet resultado = st.executeQuery();
-            ArrayList<model.Empleados> listaEmpleado = new ArrayList<>();
+            PreparedStatement ps = con.prepareCall(SQL);
+            ResultSet resultado = ps.executeQuery();
+            ArrayList<model.Empleados> Lista = new ArrayList<>();
             model.Empleados emp;
             while (resultado.next()) {
                 emp = new model.Empleados();
-                emp.setCod_empleado(resultado.getString("cod_empleado"));
-                emp.setNombres(resultado.getString("nombres"));
-                /*emp.setAppaterno(resultado.getString("appaterno"));
-                emp.setApmaterno(resultado.getString("apmaterno")); */
-                emp.setFono(resultado.getString("fono"));
+                emp.setCod_empleados(resultado.getString("cod_empleados"));
+                emp.setNombres(resultado.getString("nombres"));               
+                emp.setApellidos(resultado.getString("apellidos"));
+                emp.setDni(resultado.getString("dni"));
+                emp.setUsername(resultado.getString("username"));
+                emp.setPassword(resultado.getString("password"));
+                emp.setTelefono(resultado.getString("telefono"));
                 emp.setEmail(resultado.getString("email"));
-                emp.setCod_tipoempleado(resultado.getString("cod_tipoempleado"));
-                emp.setUsuario(resultado.getString("usuario"));
-                emp.setClave(resultado.getString("clave"));
-                emp.setEstado(resultado.getString("estado"));
-                listaEmpleado.add(emp);
+                emp.setEstado(resultado.getInt("estado"));
+                 emp.setCod_tipoem(resultado.getInt("cod_tipoem"));
+
+                Lista.add(emp);
             }
-            return listaEmpleado;
+            return Lista;
         } catch (SQLException ex) {
             return null;
         }
     }
 
-    public static boolean RegistrarEmpleado(model.Empleados em) {
+    public static boolean EliminarEmpleados(model.Empleados emp) {
         try {
             CallableStatement cs = null;
-            Connection con = dao.Conexion.conectar();
-            PreparedStatement sp = con.prepareStatement("{call sp_ingresaempleados(?,?,?,?,?,?,?,?,?)}");
-            sp.setString(1, em.getNombres());
-            /*sp.setString(2, em.getAppaterno());
-            sp.setString(3, em.getApmaterno()); */
-            sp.setString(4, em.getFono());
-            sp.setString(5, em.getEmail());
-            sp.setString(6, em.getCod_tipoempleado());
-            sp.setString(7, em.getUsuario());
-            sp.setString(8, em.getClave());
-            sp.setString(9, em.getEstado());
+            Connection con = Conexion.conectar();
+            CallableStatement sp = con.prepareCall("{call sp_EliminaEmpleados(?)}");
+            sp.setString(1, emp.getCod_empleados());
             if (sp.executeUpdate() > 0) {
                 return true;
             } else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
-
     }
 
-    public static Empleados idCodigo(String id) throws SQLException {
-        Empleados emp = new Empleados();
+    public static Empleados CodEmpleados(String cod) {
+        model.Empleados emp = new model.Empleados();
         try {
-            Connection con = dao.Conexion.conectar();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM empleados WHERE cod_empleado=?");
-            ps.setString(1, id);
+            Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement("select * from empleados where cod_empleados=?");
+            ps.setString(1, cod);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                emp.setCod_empleado(rs.getString(1));
+                emp.setCod_empleados(rs.getString(1));
                 emp.setNombres(rs.getString(2));
-               /* emp.setAppaterno(rs.getString(3));
-                emp.setApmaterno(rs.getString(4)); */
-                emp.setFono(rs.getString(5));
-                emp.setEmail(rs.getString(6));
-                emp.setCod_tipoempleado(rs.getString(7));
-                emp.setUsuario(rs.getString(8));
-                emp.setClave(rs.getString(9));
-                emp.setEstado(rs.getString(10));
-                con.close();
+                emp.setApellidos(rs.getString(3));
+                emp.setDni(rs.getString(4));
+                emp.setUsername(rs.getString(5));
+                emp.setPassword(rs.getString(6));
+                emp.setTelefono(rs.getString(7));
+                emp.setEmail(rs.getString(8));
+                emp.setEstado(rs.getInt(9));
+                emp.setCod_tipoem(rs.getInt(10));
 
+                con.close();
             }
         } catch (SQLException ex) {
-
         }
         return emp;
     }
 
-    public static boolean ModificaEmpleado(model.Empleados em) {
+    public static boolean ModificarEmpleados(model.Empleados emp) {
         try {
             CallableStatement cs = null;
-            Connection con = dao.Conexion.conectar();
-            PreparedStatement ps = con.prepareStatement("{call sp_modificaempleados(?,?,?,?,?,?,?,?,?,?)}");
-            ps.setString(1, em.getCod_empleado());
-            ps.setString(2, em.getNombres());
-            /*ps.setString(3, em.getAppaterno());
-            ps.setString(4, em.getApmaterno()); */
-            ps.setString(5, em.getFono());
-            ps.setString(6, em.getEmail());
-            ps.setString(7, em.getCod_tipoempleado());
-            ps.setString(8, em.getUsuario());
-            ps.setString(9, em.getClave());
-            ps.setString(10, em.getEstado());
+            Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement("{call sp_ActualizaEmpleados(?,?,?,?,?,?,?,?,?,?)}");
+            ps.setString(1, emp.getCod_empleados());
+            ps.setString(2, emp.getNombres());           
+            ps.setString(3, emp.getApellidos());
+            ps.setString(4, emp.getDni());
+            ps.setString(5, emp.getUsername());
+            ps.setString(6, emp.getPassword());
+            ps.setString(7, emp.getTelefono());
+            ps.setString(8, emp.getEmail());
+            ps.setInt(9, emp.getEstado());
+             ps.setInt(10, emp.getCod_tipoem());
+
             if (ps.executeUpdate() > 0) {
                 return true;
             } else {
@@ -124,21 +140,4 @@ public class EmpleadosDAO {
         }
         return false;
     }
-
-    public static boolean eliminaempleado(model.Empleados emp) {
-        try {
-            CallableStatement cs = null;
-            Connection con = Conexion.conectar();
-            CallableStatement sp = con.prepareCall("{call sp_eliminaempleados(?)}");
-            sp.setString(1, emp.getCod_empleado());
-            if (sp.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException ex) {
-            return false;
-        }
-    }
-
 }

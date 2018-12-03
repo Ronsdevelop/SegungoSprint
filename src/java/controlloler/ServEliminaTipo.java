@@ -59,15 +59,15 @@ public class ServEliminaTipo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cod = request.getParameter("cod");
+        int cod = Integer.parseInt(request.getParameter("cod"));
         TipoEmpleado tp = new TipoEmpleado();
         tp.setCod_temp(cod);
         if (dao.TEmpleadoDAO.EliminaTipoEmp(tp)) {
-            request.setAttribute("mensaje", "Tipo Eliminado");
+            request.setAttribute("mensaje", "Eliminado CORECTAMENTE");
         }else{
-            request.setAttribute("mensaje", "Tipo no eliminado");
+            request.setAttribute("mensaje", "ERROR al Eliminar");
         }
-        request.getRequestDispatcher("TiposEmpleados.jsp").forward(request, response);
+        response.sendRedirect("vistas/tipoempleado.jsp");
       
     }
 

@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Richard
  */
-@WebServlet(name = "Servleteliminarnivel", urlPatterns = {"/Servleteliminarnivel"})
-public class Servleteliminarnivel extends HttpServlet {
+@WebServlet(name = "Servletingresatipohabitacion", urlPatterns = {"/Servletingresatipohabitacion"})
+public class Servletingresatipohabitacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class Servleteliminarnivel extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servleteliminarnivel</title>");            
+            out.println("<title>Servlet Servletingresatipohabitacion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servleteliminarnivel at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servletingresatipohabitacion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,19 +58,9 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigo=request.getParameter("cod");
-        model.Niveles niv=new model.Niveles();
-        niv.setCod_nivel(codigo);
-        if(dao.NivelDAO.eliminanivel(niv))
-        {
-           request.setAttribute("mensaje","Nivel ELIMINADO");
-        }
-        else{
-            request.setAttribute("mensaje","ERROR al Eliminar");
-        }
-        response.sendRedirect("vistas/niveles.jsp");
-    
+        processRequest(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -82,7 +72,17 @@ public class Servleteliminarnivel extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String nom = request.getParameter("nom");
+        String des = request.getParameter("des");
+        model.TipoHabitacion th = new model.TipoHabitacion();
+        th.setTipo_habitacion(nom);
+        th.setDescripcion(des);
+        if (dao.TipoHabitacionDAO.RegistrarTipoHabitacion(th)) {
+            request.setAttribute("mensaje", "Tipo_Habitacion REGISTRADA Corectamente");
+        }else{
+            request.setAttribute("mensaje", "Tipo_Habitacion ERROR al Registrar");
+        }
+       response.sendRedirect("vistas/tipohabitacion.jsp");
     }
 
     /**

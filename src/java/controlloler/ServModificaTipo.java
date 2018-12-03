@@ -73,21 +73,20 @@ public class ServModificaTipo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
-        String cod = request.getParameter("cod");
-        String tipo = request.getParameter("tipo");
-        String des = request.getParameter("des");
+        int cod = Integer.parseInt(request.getParameter("cod"));
+        String tipo_empleo = request.getParameter("tipo");
+        String descripcion = request.getParameter("des");
         TipoEmpleado tp = new TipoEmpleado();
         tp.setCod_temp(cod);
-        tp.setTempleado(tipo);
-        /*tp.setDescripcion(des); */
+        tp.setTempleado(tipo_empleo);
+       
         
         if (dao.TEmpleadoDAO.ModificaTipoEm(tp)) {
-            request.setAttribute("mensaje", "Tipo Modificado Correctamente");            
+            request.setAttribute("mensaje", "Modificado CORRECTAMENTE");            
         }else{
-             request.setAttribute("mensaje", "No se Pudo Modificar Correctamente"); 
+             request.setAttribute("mensaje", "ERROR al Modificar"); 
         }  
-        request.getRequestDispatcher("TiposEmpleados.jsp").forward(request, response);
-        processRequest(request, response);
+        response.sendRedirect("vistas/tipohabitacion.jsp");
     }
 
     /**
