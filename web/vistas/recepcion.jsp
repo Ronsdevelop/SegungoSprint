@@ -4,6 +4,8 @@
 <% if (E != null) { %> 
 <%@page import="dao.ClienteDAO"%>
 <%@page import="model.Cliente"%>
+<%@page import="dao.NivelDAO"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,6 +33,16 @@
                 <section class="content">
 
                     <!-- CONTENIDO DE LA PAGINA -->
+                    
+                    <% for (int i = 1; i <= NivelDAO.CanNiveles(); i++) {   %>
+                     <h2 class="container-fluid bg-blue-active text-white text-center mh-50">
+                        PISO NRO <%= i%>
+                    </h2>
+                    
+                            
+                       <% } %>
+                    
+                  
 
 
 

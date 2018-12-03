@@ -118,5 +118,23 @@ public class NivelDAO {
         }
 
     }
+    public static int CanNiveles(){
+        try {
+            Connection con = Conexion.conectar();
+            String SQL = ("SELECT COUNT(piso) AS PISOS FROM nivel");
+            PreparedStatement sp = con.prepareStatement(SQL);
+            ResultSet rs = sp.executeQuery();
+            while (rs.next()) {                
+               return rs.getInt(1);
+            }
+            return 0;
+         
+            
+        } catch (Exception e) {
+               return 0;
+        }        
+        
+     
+    }
 
 }

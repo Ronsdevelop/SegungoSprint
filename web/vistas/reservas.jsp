@@ -32,9 +32,6 @@
                 <!-- Main content -->
                 <section class="content">
 
-                    <!-- CONTENIDO DE LA PAGINA -->
-
-
 
                 </section>
             </div>
