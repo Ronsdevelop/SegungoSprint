@@ -64,8 +64,7 @@
                                                 } else if(es.getValueAt(canes, 1).equals("OCUPADA")){
                                                     out.print("<div class='small-box bg-yellow'>");
                                                 }
-                                           int num = Integer.parseInt(hab.getValueAt(h, 0).toString());
-                                           String cod = String.valueOf(hab.getValueAt(h, 3).toString());
+                                           int num = Integer.parseInt(hab.getValueAt(h, 0).toString());                                      
                                           
                                          
                                             out.print("<div class='inner'>");
@@ -75,7 +74,7 @@
                                             out.print("<div class='icon'  >");
                                             out.print("<i class='fa fa-hotel'></i>");
                                             out.print("</div>");
-                                            out.print("<a href='#' onclick='showModalEdit(\""+ cod + "\",\""+ num + "\")' class='small-box-footer'>" + es.getValueAt(canes, 1) + "<i class='fa fa-arrow-circle-right'></i></a>");
+                                            out.print("<a href='#' onclick='showModalEdit(\""+ num + "\")' class='small-box-footer'>" + es.getValueAt(canes, 1) + "<i class='fa fa-arrow-circle-right'></i></a>");
                                             out.print("</div>");
                                             out.print("</div>");
                                         }
@@ -95,19 +94,37 @@
                                     <div class="modal-header  ">
                                         <h4 class="modal-title text-center" id="tituloEdit"></h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="inputText1" class="col-lg-1 control-label" >CODIGO:</label>
-                                            <div class="col-lg-9 col-lg-offset-1">
-                                                <input type="text" class="form-control" id="codigoEdit" name="codigo" readonly="readonly" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputText1" class="col-lg-1 control-label">NUMERO :</label>
-                                            <div class="col-lg-9 col-lg-offset-1">
-                                                <input type="text" class="form-control" id="nombreEdit" name="documento"  required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
-                                            </div>
-                                        </div>
+                                   <div class="modal-body">
+
+                                        <table class="table">
+                                            <tr>
+                                                <td >
+                                                    <label for="">numero : </label>
+                                                    <input width="20" type="text" class="form-control" id="nombreEdit" name="nom"> 
+                                                </td> 
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="">Cliente : </label>
+                                                    <input type="text" class="form-control" name="ape"> 
+                                                </td> 
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="">Fecha Ingreso : </label>
+                                                    <input type="date" class="form-control" name="date"> 
+                                                </td> 
+                                            </tr>
+                                        
+                                            <tr>
+                                                <td>
+                                                    <label for="">hora Ingreso : </label>
+                                                    <input type="text" class="form-control" name="nro"> 
+                                                </td> 
+                                            </tr>                                         
+                                           
+                                           
+                                        </table>
                                     </div>
                                     <!--modal-body-->
                                     <div class="modal-footer ">                            
@@ -126,8 +143,7 @@
         </div>
         <jsp:include page="../html/scripts.html"  />   
        <script>
-            function showModalEdit(clave, numero) {
-                document.getElementById("codigoEdit").value = clave;
+            function showModalEdit( numero) {
                 document.getElementById("nombreEdit").value = numero;
                 document.getElementById("tituloEdit").innerHTML = " REGISTRAR HABITACION " + numero;
                 $('#modalEdit').modal('show');
