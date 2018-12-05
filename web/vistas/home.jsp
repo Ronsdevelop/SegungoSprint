@@ -1,7 +1,10 @@
 
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
-<% if (E != null) {%>  
+<% if (E != null) {%> 
+<%@page import="dao.Consultas"%>
+<%@page import="dao.Conexion"%>
+<%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="dao.HabitacionDAO"%>
 <%@page import="model.Empleados"%>
 <%@page import="dao.ClienteDAO"%>
@@ -37,126 +40,118 @@
 
                     <div class="row panel_modulos">
                         <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-aqua">
-                                    <div class="inner">
-                                        <h3><%= HabitacionDAO.CantHabitacion()%></h3>
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3><%= HabitacionDAO.CantHabitacion()%></h3>
 
-                                        <p>Habitaciones</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="habitaciones.jsp" class="small-box-footer">
-                                        Mas info <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                                    <p>Habitaciones</p>
                                 </div>
-                            </div>
-                      <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-green">
-                                    <div class="inner">
-                                        <h3><%= HabitacionDAO.HabReservadas()%></h3>
-
-                                        <p>Reservadas</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">
-                                        Mas info <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                                <div class="icon">
+                                    <i class="fa fa-hotel"></i>
                                 </div>
+                                <a href="habitaciones.jsp" class="small-box-footer">
+                                    Mas info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                             </div>
+                        </div>
                         <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-yellow">
-                                    <div class="inner">
-                                        <h3><%= HabitacionDAO.HabOcupadas()%></h3>
+                            <!-- small box -->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3><%= HabitacionDAO.HabReservadas()%></h3>
 
-                                        <p>Ocupadas</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">
-                                        Mas info <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                                    <p>Reservadas</p>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-light-blue">
-                                    <div class="inner">
-                                        <h3><%= HabitacionDAO.HabDisponibles()%></h3>
-
-                                        <p>Disponibles</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-hotel"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">
-                                        Mas info <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                                <div class="icon">
+                                    <i class="fa fa-hotel"></i>
                                 </div>
+                                <a href="#" class="small-box-footer">
+                                    Mas info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                             </div>
+                        </div>
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3><%= HabitacionDAO.HabOcupadas()%></h3>
+
+                                    <p>Ocupadas</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-hotel"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Mas info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-light-blue">
+                                <div class="inner">
+                                    <h3><%= HabitacionDAO.HabDisponibles()%></h3>
+
+                                    <p>Disponibles</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-hotel"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Mas info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
 
 
-                     
+
                     </div>
 
 
 
-
-
-
-
-                    <h2 class="container-fluid bg-blue-active text-white text-center mh-50">
-
-                        RESUMEN DE HABITACION
-                    </h2>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">HABITACIONES OCUPADAS</h3>
+                                 <h2 class="container-fluid bg-blue-active text-white text-center mh-50">
 
+                                        LISTA DE HABITACIONES OCUPADAS
+                                    </h2>
 
-
-
-                                </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
-                                    <table id="example1" class="table table-bordered table-striped">
+                                    <table id="" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="bg-green-active" border="1">
-                                                <th>C&oacute;digo</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido Paterno</th>
-                                                <th>Apellido Materno</th>
-                                                <th>Direccion</th>
-                                                <th>Telefono</th>
-                                                <th>Email</th>
+                                                <th>#</th>
+                                                <th>Cliente </th>
+                                                <th>Nro Documento</th>
+                                                <th>Habitacion</th>
+                                                <th>Tipo</th>
+                                                <th>F. Ingreso</th>
+                                                <th>H. Ingreso</th>                                              
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%for (Cliente Cli : ClienteDAO.listarClientes()) {%> 
+                                            <%
+                                                Consultas v = new Consultas();
+                                                Conexion cn = new Conexion();
+                                                DefaultTableModel t = new DefaultTableModel();
+                                                t = v.ListaHabOcupadas(cn.conectar());
+                                                for (int i = 0; i < t.getRowCount(); i++) {
+                                            %>
                                             <tr>
-                                                <td width='5'><%= Cli.getCod_cliente()%></td>
-                                                <td width='5'><%= Cli.getNombres()%></td>
-                                                <td width='5'><%= Cli.getApellidos()%></td>
-                                                <td width='5'><%= Cli.getTipo_doc()%></td>
-                                                <td width='5'><%= Cli.getDireccion()%></td>
-                                                <td width='5'><%= Cli.getFono()%></td>
-                                                <td width='5'><%= Cli.getEmail()%></td>
-
-
+                                                <td><%= i + 1%></td>
+                                                <td><%= t.getValueAt(i, 0)%></td>
+                                                <td><%= t.getValueAt(i, 1)%></td>
+                                                <td><%= t.getValueAt(i, 2)%></td>
+                                                <td><%= t.getValueAt(i, 3)%></td>
+                                                <td><%= t.getValueAt(i, 4)%></td>
+                                                <td><%= t.getValueAt(i, 5)%></td>
                                             </tr>
-                                            <%}%> 
-
+                                            <% } %>
 
                                         </tbody>                                       
                                     </table>

@@ -26,7 +26,7 @@
 .skin-black-light .main-header .navbar .nav .open > a:hover,
 .skin-black-light .main-header .navbar .nav .open > a:focus,
 .skin-black-light .main-header .navbar .nav > .active > a {
-  background: #ffffff;
+  background: #007700;
   color: #999999;
 }
 .skin-black-light .main-header .navbar .sidebar-toggle {
@@ -34,7 +34,7 @@
 }
 .skin-black-light .main-header .navbar .sidebar-toggle:hover {
   color: #999999;
-  background: #ffffff;
+  background: #007700
 }
 .skin-black-light .main-header .navbar > .sidebar-toggle {
   color: #333;

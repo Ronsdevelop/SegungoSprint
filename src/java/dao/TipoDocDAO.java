@@ -20,9 +20,10 @@ import model.DocumentoCliente;
 public class TipoDocDAO {
 
     public static boolean RegistraTipoDoc(DocumentoCliente T) {
+          Connection con = Conexion.conectar();
         try {
             CallableStatement cs = null;
-            Connection con = Conexion.conectar();
+          
             PreparedStatement sp = con.prepareStatement("{call sp_IngresaTipoDocCliente(?)}");
             sp.setString(1, T.getTipodocum());
             if (sp.executeUpdate() > 0) {
@@ -33,13 +34,21 @@ public class TipoDocDAO {
 
         } catch (Exception e) {
             return false;
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
     }
 
     public static ArrayList<DocumentoCliente> ListarDoc() {
+          Connection con = Conexion.conectar();
         try {
             String SQL = "select * from tipo_doccliente";
-            Connection con = Conexion.conectar();
+       
             PreparedStatement st = con.prepareCall(SQL);
             ResultSet resultado = st.executeQuery();
             ArrayList<DocumentoCliente> listaDoc = new ArrayList<>();
@@ -53,14 +62,22 @@ public class TipoDocDAO {
             return listaDoc;
         } catch (SQLException ex) {
             return null;
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
 
     }
 
     public static String getDoc(String cod) {
+          Connection con = Conexion.conectar();
         try {
             String SQL = "SELECT documento FROM tipo_doccliente WHERE cod_tipdoccl=?";
-            Connection con = Conexion.conectar();
+           
             PreparedStatement st = con.prepareStatement(SQL);
             st.setString(1, cod);
             ResultSet resultado = st.executeQuery();
@@ -70,15 +87,23 @@ public class TipoDocDAO {
          return "--";
         } catch (Exception e) {
             return "--";
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
 
     }
     
     
     public static boolean ModificaTipoDocumento(DocumentoCliente Doc){
+          Connection con = Conexion.conectar();
           try {
             CallableStatement cs = null;
-            Connection con = dao.Conexion.conectar();
+            
             PreparedStatement ps = con.prepareStatement("{call sp_ActualizaDocCliente(?,?)}");
             ps.setString(1, Doc.getCod_tipodoc());
             ps.setString(2, Doc.getTipodocum());      
@@ -89,9 +114,17 @@ public class TipoDocDAO {
                 return false;
             }
         } catch (SQLException ex) {
+             return false; 
 
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
-        return false; 
+       
     }
 
 }

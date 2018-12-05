@@ -199,7 +199,7 @@
         </div>
         <jsp:include page="../html/scripts.html"  />
 
-        <<script>
+        <script>
             function showModalEdit(clave, nombre) {
                 document.getElementById("codigoEdit").value = clave;
                 document.getElementById("nombreEdit").value = nombre;

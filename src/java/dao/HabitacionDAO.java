@@ -19,34 +19,44 @@ import model.Habitacion;
  * @author Richard
  */
 public class HabitacionDAO {
-   
 
     public static boolean RegistrarHabitacion(model.Habitacion hab) {
+        Connection con = Conexion.conectar();
         try {
             CallableStatement cs = null;
-            Connection con = Conexion.conectar();
+            
             PreparedStatement ps = con.prepareStatement("{call sp_IngresaHabitacion(?,?,?,?,?)}");
             ps.setString(1, hab.getNumero());
             ps.setFloat(2, hab.getPrecio());
             ps.setString(3, hab.getDescripcion());
             ps.setString(4, hab.getCod_tipoh());
             ps.setString(5, hab.getCod_nivel());
-           
+
             if (ps.executeUpdate() > 0) {
+              
                 return true;
             } else {
+               
                 return false;
             }
         } catch (SQLException ex) {
             return false;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
 
     }
 
     public static ArrayList<model.Habitacion> ListaHabitacion() {
+         Connection con = Conexion.conectar();
         try {
             String SQL = "select * from habitacion";
-            Connection con = Conexion.conectar();
+           
             PreparedStatement ps = con.prepareCall(SQL);
             ResultSet resultado = ps.executeQuery();
             ArrayList<model.Habitacion> Lista = new ArrayList<>();
@@ -62,32 +72,53 @@ public class HabitacionDAO {
                 hab.setCod_estado(resultado.getString("cod_estado"));
                 Lista.add(hab);
             }
+           
             return Lista;
         } catch (SQLException ex) {
             return null;
         }
+        finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
     }
 
     public static boolean EliminarHabitacion(model.Habitacion hab) {
+         Connection con = Conexion.conectar();
         try {
-      
-            Connection con = Conexion.conectar();
+
+           
             CallableStatement sp = con.prepareCall("{call sp_EliminaHabitacion(?)}");
             sp.setString(1, hab.getCod_habitacion());
             if (sp.executeUpdate() > 0) {
+             
                 return true;
             } else {
+             
                 return false;
             }
         } catch (SQLException e) {
             return false;
         }
+         finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
     }
 
     public static Habitacion CodHabitacion(String cod) {
         model.Habitacion hab = new model.Habitacion();
-        try {
             Connection con = Conexion.conectar();
+        try {
+        
             PreparedStatement ps = con.prepareStatement("select * from habitacion where cod_habitacion=?");
             ps.setString(1, cod);
             ResultSet rs = ps.executeQuery();
@@ -99,17 +130,28 @@ public class HabitacionDAO {
                 hab.setCod_tipoh(rs.getString(5));
                 hab.setCod_nivel(rs.getString(6));
                 hab.setCod_estado(rs.getString(7));
-                con.close();
+              
             }
+            return hab;
+            
         } catch (SQLException ex) {
+            return null;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
-        return hab;
+        
     }
 
     public static boolean ModificarHabitacion(model.Habitacion hab) {
+         Connection con = Conexion.conectar();
         try {
-         
-            Connection con = Conexion.conectar();
+
+           
             PreparedStatement ps = con.prepareStatement("{call sp_ActualizaHabitacion(?,?,?,?,?,?,?)}");
             ps.setString(1, hab.getCod_habitacion());
             ps.setString(2, hab.getNumero());
@@ -119,71 +161,123 @@ public class HabitacionDAO {
             ps.setString(6, hab.getCod_nivel());
             ps.setString(7, hab.getCod_estado());
             if (ps.executeUpdate() > 0) {
+             
                 return true;
             } else {
+              
                 return false;
             }
         } catch (SQLException ex) {
-
+            return false;
         }
-        return false;
+        finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+
     }
-    
-    public static int CantHabitacion(){
-          try {
+
+    public static int CantHabitacion() {
+        Connection con = Conexion.conectar();
+        try {
             String SQL = "SELECT COUNT(numero) as Cantidad FROM habitacion";
-            Connection con = Conexion.conectar();
-            PreparedStatement st = con.prepareStatement(SQL);        
+
+            PreparedStatement st = con.prepareStatement(SQL);
             ResultSet resultado = st.executeQuery();
             while (resultado.next()) {
-             return resultado.getInt("Cantidad");
+              
+                return resultado.getInt("Cantidad");
             }
-         return 0;
+           
+            return 0;
         } catch (Exception e) {
             return 0;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
 
     }
-    public static int HabReservadas(){
+
+    public static int HabReservadas() {
+        Connection con = Conexion.conectar();
         try {
-            Connection con = Conexion.conectar();
+
             PreparedStatement sp = con.prepareCall("call sp_CanHabReservadas");
             ResultSet res = sp.executeQuery();
-            while (res.next()) {                
-            return res.getInt(1);
+            while (res.next()) {
+               
+                return res.getInt(1);
             }
+          
             return 0;
         } catch (Exception e) {
             return 0;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
     }
-    
-    public static int HabDisponibles(){
+
+    public static int HabDisponibles() {
+        Connection con = Conexion.conectar();
         try {
-            Connection con = Conexion.conectar();
+
             PreparedStatement sp = con.prepareStatement("call sp_CantHabDisponibles");
             ResultSet res = sp.executeQuery();
-            while (res.next()) {                
+            while (res.next()) {
+         
                 return res.getInt(1);
             }
+            
             return 0;
         } catch (Exception e) {
             return 0;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
-            
-            
+
     }
-    public static int HabOcupadas(){
+
+    public static int HabOcupadas() {
+        Connection con = Conexion.conectar();
         try {
-            Connection con = Conexion.conectar();
+
             PreparedStatement sp = con.prepareStatement("call sp_CantHabOcupadas");
             ResultSet res = sp.executeQuery();
-            while (res.next()) {                
+            while (res.next()) {
+
                 return res.getInt(1);
             }
+
             return 0;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return 0;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
         }
+
     }
 }
