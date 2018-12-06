@@ -76,7 +76,7 @@
                                                         </button>
 
 
-                                                        <a href="../#?cod=<%= D.getCod_tipodoc()%>">
+                                                        <a href="../ServletEliminadocClien?cod=<%= D.getCod_tipodoc()%>">
                                                             <button type="button" class="btn btn-danger btn-sm">
                                                                 <span Class="glyphicon glyphicon-trash"></span>
                                                             </button>

@@ -20,10 +20,10 @@ import model.DocumentoCliente;
 public class TipoDocDAO {
 
     public static boolean RegistraTipoDoc(DocumentoCliente T) {
-          Connection con = Conexion.conectar();
+        Connection con = Conexion.conectar();
         try {
             CallableStatement cs = null;
-          
+
             PreparedStatement sp = con.prepareStatement("{call sp_IngresaTipoDocCliente(?)}");
             sp.setString(1, T.getTipodocum());
             if (sp.executeUpdate() > 0) {
@@ -34,7 +34,7 @@ public class TipoDocDAO {
 
         } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -45,10 +45,10 @@ public class TipoDocDAO {
     }
 
     public static ArrayList<DocumentoCliente> ListarDoc() {
-          Connection con = Conexion.conectar();
+        Connection con = Conexion.conectar();
         try {
             String SQL = "select * from tipo_doccliente";
-       
+
             PreparedStatement st = con.prepareCall(SQL);
             ResultSet resultado = st.executeQuery();
             ArrayList<DocumentoCliente> listaDoc = new ArrayList<>();
@@ -62,7 +62,7 @@ public class TipoDocDAO {
             return listaDoc;
         } catch (SQLException ex) {
             return null;
-        }finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -74,20 +74,20 @@ public class TipoDocDAO {
     }
 
     public static String getDoc(String cod) {
-          Connection con = Conexion.conectar();
+        Connection con = Conexion.conectar();
         try {
             String SQL = "SELECT documento FROM tipo_doccliente WHERE cod_tipdoccl=?";
-           
+
             PreparedStatement st = con.prepareStatement(SQL);
             st.setString(1, cod);
             ResultSet resultado = st.executeQuery();
             while (resultado.next()) {
-             return resultado.getString("documento");
+                return resultado.getString("documento");
             }
-         return "--";
+            return "--";
         } catch (Exception e) {
             return "--";
-        }finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -97,16 +97,15 @@ public class TipoDocDAO {
         }
 
     }
-    
-    
-    public static boolean ModificaTipoDocumento(DocumentoCliente Doc){
-          Connection con = Conexion.conectar();
-          try {
+
+    public static boolean ModificaTipoDocumento(DocumentoCliente Doc) {
+        Connection con = Conexion.conectar();
+        try {
             CallableStatement cs = null;
-            
+
             PreparedStatement ps = con.prepareStatement("{call sp_ActualizaDocCliente(?,?)}");
             ps.setString(1, Doc.getCod_tipodoc());
-            ps.setString(2, Doc.getTipodocum());      
+            ps.setString(2, Doc.getTipodocum());
 
             if (ps.executeUpdate() > 0) {
                 return true;
@@ -114,9 +113,9 @@ public class TipoDocDAO {
                 return false;
             }
         } catch (SQLException ex) {
-             return false; 
+            return false;
 
-        }finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -124,7 +123,31 @@ public class TipoDocDAO {
                 }
             }
         }
-       
+
+    }
+
+    public static boolean EliminaDoc(DocumentoCliente doc) {
+        Connection con = Conexion.conectar();
+        try {
+            PreparedStatement ps = con.prepareStatement("{call sp_EliminaDocCliente(?)}");
+            ps.setString(1, doc.getCod_tipodoc());
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+
+        }
     }
 
 }
