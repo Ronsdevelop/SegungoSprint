@@ -2,13 +2,15 @@
 <%@page import="dao.Consultas"%>
 <%@page import="model.Empleados"%>
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
-<% if (E != null) { %>   
+<% if (E != null) {%>   
 <%@page import="dao.NivelDAO"%>
 <%@page import="model.Niveles"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
         <jsp:include page="../html/head.jsp" />
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -20,7 +22,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                       NIVELES
+                        NIVELES
                         <small>Lista Niveles</small>
                     </h1>
                     <ol class="breadcrumb">
@@ -34,8 +36,7 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="box">
+                        <div class="col-xs-12">                       
 
 
                                 <div class="box">
@@ -43,50 +44,49 @@
                                         <h3 class="box-title">Vista General de Niveles</h3>
                                     </div>
                                     <!-- /.box-header -->
-                                    <div class="box-body">
-                                        <%=(request.getAttribute("mensaje") != null ? request.getAttribute("mensaje") : "")%>
+                                    <div class="box-body">  
+                                        <div class="col-xs-8 " >
 
-                                        <table id="example3" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr class="bg-primary" border="1">
-                                                    <th>CODIGO</th>
-                                                    <th>NIVEL</th>
-                                                    <th>OPERACIONES</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%for (Niveles th : NivelDAO.listarniveles()) {%> 
-                                                <tr>
-                                                    <td width='5'><%= th.getCod_nivel()%></td>
-                                                    <td width='5'><%= th.getNom_nivel()%></td>
-                                                    <td> 
-
-                                                        <a href="#?cod=<%= th.getCod_nivel()%>">
-                                                            <button type="button" class="btn btn-success btn-sm">
+                                            <table   id="example3" class="table table-bordered table-striped" style="table-layout:fixed">
+                                                <thead>
+                                                    <tr class="bg-primary" border="1">
+                                                        <th>CODIGO</th>
+                                                        <th>NIVEL</th>
+                                                        <th width="200">ACCIONES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%for (Niveles th : NivelDAO.listarniveles()) {%> 
+                                                    <tr>
+                                                        <td width='5'><%= th.getCod_nivel()%></td>
+                                                        <td width='5'><%= th.getNom_nivel()%></td>
+                                                        <td>                                                         
+                                                            <button type="button"  onclick="showModalEdit('<%= th.getCod_nivel()%>', '<%= th.getNom_nivel()%>')" class="btn btn-success btn-sm">
                                                                 <span Class="glyphicon glyphicon-edit"></span>
                                                             </button>
-                                                        </a>
-
-                                                        <a href="../Servleteliminarnivel?cod=<%= th.getCod_nivel()%>">
-                                                            <button type="button" class="btn btn-danger btn-sm">
-                                                                <span Class="glyphicon glyphicon-trash"></span>
-                                                            </button>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <%}%> 
 
 
-                                            </tbody>                                       
-                                        </table>
+                                                            <a href="../Servleteliminarnivel?cod=<%= th.getCod_nivel()%>">
+                                                                <button type="button" class="btn btn-danger btn-sm">
+                                                                    <span Class="glyphicon glyphicon-trash"></span>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <%}%> 
+
+
+                                                </tbody>                                       
+                                            </table>
+                                        </div>
+                                        <!-- /.box-body -->
                                     </div>
-                                    <!-- /.box-body -->
+                                    <!-- /.box -->
                                 </div>
-                                <!-- /.box -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
+                                <!-- /.col -->
+                        
 
+                        </div>
                     </div>
                     <div class="container-fluid">
                         <div class="row">
@@ -97,47 +97,86 @@
                             </div>
                         </div>  
                     </div>
+                    <!--MODAL REGISTRAR -->
 
-                    <div class="modal modal-info fade" id="modal-info">
+                    <div class="modal fade" id="modal-info">
                         <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Registrar Nivel</h4>
-                                </div>
-                                <form action="../ingresanivel" method="POST">
+                            <form action="../ingresanivel" method="POST">
+                                <div class="modal-content">
+
+                                    <div class="modal-header bg-primary">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title text-center" > <strong>REGISTRAR NIVEL </strong>  </h4>
+                                    </div>
                                     <div class="modal-body">
-                                        <table class="table">
-                                            <tr>
-                                                <td>
-                                                    <label for="">Nivel : </label>
-                                                    <input type="text" class="form-control" name="niv" required> 
-                                                </td> 
-                                            </tr>
-                                        </table>
-
-
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nivel</span>
+                                            <input type="text" class="form-control" name="niv" placeholder="Nivel">
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-outline">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
 
+                                    <div class="modal-footer bg-primary" >
+                                        <button type="submit" name="action" id="#" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                                    </div>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
+                    <!-- FIN MODAL REGISTRAR-->
 
+                    <!-- MODAL EDITAR -->
+                    <div class="modal fade" id="modalEdit">
+                        <div class="modal-dialog">
+                            <form action="../#" method="POST">
+                                <div class="modal-content">
+
+                                    <div class="modal-header bg-green ">
+                                        <h4 class="modal-title text-center" id="tituloEdit"></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Codigo</span>
+                                            <input type="text" class="form-control" name="niv" id="codigoEdit" readonly="readonly" placeholder="Codigo">
+                                        </div>
+                                        <br>                                        
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nivel</span>
+                                            <input type="text" class="form-control" name="niv" id="nombreEdit" placeholder="Nivel">
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer bg-green" >
+                                        <button type="submit" name="action" id="#" class="btn btn-primary pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
                     <!-- /.row -->
                 </section>
                 <!-- /.content -->
 
             </div>
-                                                <jsp:include page="../html/footer.jsp" />
+            <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />
+        <script>
+            function showModalEdit(clave, nombre) {
+                document.getElementById("codigoEdit").value = clave;
+                document.getElementById("nombreEdit").value = nombre;
+                document.getElementById("tituloEdit").innerHTML = "EDITAR REGISTRO " + clave;
+                $('#modalEdit').modal('show');
+
+            }
+        </script>
+
+
         <script>
             $(function () {
                 $('#example3').DataTable();

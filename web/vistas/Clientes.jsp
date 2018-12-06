@@ -15,7 +15,7 @@
     <head>
         <jsp:include page="../html/head.jsp" />
 
-
+        <link href="../css/misEstilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -80,11 +80,10 @@
                                                     <td width='5'><%= Cli.getEmail()%></td>                                             
                                                     <td> 
 
-                                                        <a href="#?cod=<%= Cli.getCod_cliente()%>">
-                                                            <button type="button" class="btn btn-success btn-sm">
-                                                                <span Class="glyphicon glyphicon-edit"></span>
-                                                            </button>
-                                                        </a>
+                                                        <button type="button" onclick="showModalEdit('<%= Cli.getCod_cliente()%>', '<%= Cli.getNombres()%>','<%= Cli.getApellidos()%>','<%= Cli.getRasonsocial()%>','<%= TipoDocDAO.getDoc(Cli.getTipo_doc())%>','<%= Cli.getDocumento()%>','<%= Cli.getDireccion()%>','<%= Cli.getFono()%>','<%= Cli.getEmail()%>')" class="btn btn-success btn-sm">
+                                                            <span Class="glyphicon glyphicon-edit"></span>
+                                                        </button>
+
 
                                                         <a href="#?cod=<%= Cli.getCod_cliente()%>">
                                                             <button type="button" class="btn btn-danger btn-sm">
@@ -116,83 +115,148 @@
                             </div>
                         </div>  
                     </div>
-
-                    <div class="modal modal-info fade" id="modal-info">
+                    <!--MODAL REGISTRAR  -->
+                    <div class="modal fade" id="modal-info">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-primary">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Registrar Cliente</h4>
+                                    <h4 class="modal-title text-center">REGISTRAR CLIENTE</h4>
                                 </div>
                                 <form action="../ServIngresaCliente" method="POST">
                                     <div class="modal-body">
 
-                                        <table class="table">
-                                            <tr>
-                                                <td>
-                                                    <label for="">Nombres : </label>
-                                                    <input type="text" class="form-control" name="nom"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Apellidos : </label>
-                                                    <input type="text" class="form-control" name="ape"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Rason Social : </label>
-                                                    <input type="text" class="form-control" name="raz"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Tipo Documento : </label>
-                                                    <select class="form-control"  name="tip" >
-                                                        <option value="">-- Selecciona Documento --</option>
-                                                        <%for (DocumentoCliente tip : TipoDocDAO.ListarDoc()) {%> 
-                                                        <option value="<%= tip.getCod_tipodoc()%>"> <%= tip.getTipodocum()%></option>
-                                                        <%}%> 
-                                                    </select>
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Nro Documento : </label>
-                                                    <input type="text" class="form-control" name="nro"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Direccion : </label>
-                                                    <input type="text" class="form-control" name="dir"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Telefono : </label>
-                                                    <input type="text" class="form-control" name="tel"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Email : </label>
-                                                    <input type="email" class="form-control" name="ema"> 
-                                                </td> 
-                                            </tr>
-                                        </table>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nombres</span>
+                                            <input type="text" class="form-control" name="nom" placeholder="Nombres de Cliente">
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Apellidos</span>
+                                            <input type="text" class="form-control" name="ape" placeholder="Apellidos de Cliente">
+                                        </div>
+                                        <br>                                       
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rason Social</span>
+                                            <input type="text" class="form-control" name="raz" placeholder="Razon Social de Cliente">
+                                        </div>
+                                        <br>                                       
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Tipo de Documento</span>
+                                            <select class="form-control"  name="tip" >
+                                                <option value="">-- Selecciona Documento --</option>
+                                                <%for (DocumentoCliente tip : TipoDocDAO.ListarDoc()) {%> 
+                                                <option value="<%= tip.getCod_tipodoc()%>"> <%= tip.getTipodocum()%></option>
+                                                <%}%> 
+                                            </select>
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nro Documento</span>
+                                            <input type="text" class="form-control" name="nro" placeholder="Nro de Documento de cliente">
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Direccion</span>
+                                            <input type="text" class="form-control" name="dir" placeholder="Direccion de Cliente">
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Telefono</span>
+                                            <input type="text" class="form-control"name="tel" placeholder="Telefono de Cliente">
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Email</span>
+                                            <input type="text" class="form-control" name="ema" placeholder="Email de Cliente">
+                                        </div>
+                                        <br>                                         
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-outline">Guardar</button>
+                                    <div class="modal-footer bg-primary">
+                                        <button type="submit" name="action" id="#" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
                                     </div>
                                 </form>                  
                             </div>
                             </form>
                         </div>
                     </div>
+                    <!-- FIN MODAL REGISTRAR-->
+
+                    <!--MODAL EDITAR  -->
+                    <div class="modal fade" id="modalEdit">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-green">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title text-center" id="tituloEdit"></h4>
+                                </div>
+                                <form action="../#" method="POST">
+                                    <div class="modal-body">
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Codigo</span>
+                                            <input type="text" class="form-control" id="codigoEdit" name="cod" placeholder="Codigo de Cliente">
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nombres</span>
+                                            <input type="text" class="form-control" name="nom" id="nombreEdit" placeholder="Nombres de Cliente">
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Apellidos</span>
+                                            <input type="text" class="form-control" name="ape"  id="apellidoEdit" placeholder="Apellidos de Cliente">
+                                        </div>
+                                        <br>                                       
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Rason Social</span>
+                                            <input type="text" class="form-control" name="raz" id="rasonEdit" placeholder="Razon Social de Cliente">
+                                        </div>
+                                        <br>                                       
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Tipo de Documento</span>
+                                            <select class="form-control" id="documentoEdit" name="tip" >
+                                                <option value="">-- Selecciona Documento --</option>
+                                                <%for (DocumentoCliente tip : TipoDocDAO.ListarDoc()) {%> 
+                                                <option value="<%= tip.getCod_tipodoc()%>"> <%= tip.getTipodocum()%></option>
+                                                <%}%> 
+                                            </select>
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nro Documento</span>
+                                            <input type="text" class="form-control" id="nrodocEdit" name="nro" placeholder="Nro de Documento de cliente">
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Direccion</span>
+                                            <input type="text" class="form-control" name="dir" id="direccionEdit" placeholder="Direccion de Cliente">
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Telefono</span>
+                                            <input type="text" class="form-control"name="tel" id="telefonoEdit" placeholder="Telefono de Cliente">
+                                        </div>
+                                        <br>   
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Email</span>
+                                            <input type="text" class="form-control" name="ema" id="emailEdit" placeholder="Email de Cliente">
+                                        </div>
+                                        <br>                                         
+                                    </div>
+                                    <div class="modal-footer bg-green">
+                                        <button type="submit" name="action" id="#" class="btn btn-primary pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                                    </div>
+                                </form>                  
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- FIN MODAL EDITAR-->
 
 
                     <!-- /.row -->
@@ -203,6 +267,23 @@
             <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />
+
+        <script>
+            function showModalEdit(clave, nombre, apellido, rason, tipdoc, doc, dire, tel, emai) {
+                document.getElementById("codigoEdit").value = clave;
+                document.getElementById("nombreEdit").value = nombre;
+                document.getElementById("apellidoEdit").value = apellido;
+                document.getElementById("rasonEdit").value = rason;
+                document.getElementById("documentoEdit").value = tipdoc;
+                document.getElementById("nrodocEdit").value = doc;
+                document.getElementById("direccionEdit").value = dire;
+                document.getElementById("telefonoEdit").value = tel;
+                document.getElementById("emailEdit").value = emai;
+                document.getElementById("tituloEdit").innerHTML = "EDITAR REGISTRO DE CLIENTE " + clave;
+                $('#modalEdit').modal('show');
+
+            }
+        </script>
         <script>
             $(function () {
                 $('#example3').DataTable();

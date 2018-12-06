@@ -15,6 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="../css/misEstilos.css" rel="stylesheet" type="text/css"/>
         <jsp:include page="../html/head.jsp" />
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -129,23 +130,21 @@
                                                 
                                                 <!-- MODAL REGISTRAR -->
 
-                    <div class="modal modal-primary fade" id="modal-info">
+                    <div class="modal fade" id="modal-info">
                         <div class="modal-dialog">
                             <form class="form-horizontal" method="post" id="cliente_form" action="../ServletIngresaDoc">
                                 <div class="modal-content">
-                                    <div class="modal-header  ">
-                                        <h4 class="modal-title text-center">AGREGAR TIPO DE DOCUMENTO </h4>
+                                    <div class="modal-header bg-primary  ">
+                                        <h4 class="modal-title text-center "> AGREGAR TIPO DE DOCUMENTO </h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="inputText1" class="col-lg-1 control-label">DOCUMENTO:</label>
-                                            <div class="col-lg-9 col-lg-offset-1">
-                                                <input type="text" class="form-control" id="nombre" name="documento" placeholder="Documento de Cliente" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
-                                            </div>
+                                      <div class="input-group">
+                                            <span class="input-group-addon">Documento</span>
+                                            <input type="text" class="form-control" placeholder="Documento Cliente">
                                         </div>
                                     </div>
                                     <!--modal-body-->
-                                    <div class="modal-footer ">                            
+                                    <div class="modal-footer bg-primary">                            
                                         <button type="submit" name="action" id="#" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
                                     </div>
