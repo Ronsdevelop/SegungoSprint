@@ -145,6 +145,22 @@
         </div>
         <jsp:include page="../html/scripts.html"  />
         <script>
+            $(document).ready(function () {
+                var table = $('#example3').DataTable({
+                    responsive: true,
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        ['10 Filas', '25 Filas', '50 Filas', 'Todos']
+                    ],
+                });
+
+                new $.fn.dataTable.FixedHeader(table);
+            });
+        </script>
+       <!-- <script>
             $(function () {
                 $('#example3').DataTable();
                 $('#example2').DataTable({
@@ -155,7 +171,7 @@
                     'info': true,
                     'autoWidth': false
                 });
-            });</script>  
+            });</script>  -->
     </body>
 </html>
 <% } else {

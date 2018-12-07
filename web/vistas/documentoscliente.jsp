@@ -127,8 +127,8 @@
                             </div>
                         </div>
                     </div>
-                                                
-                                                <!-- MODAL REGISTRAR -->
+
+                    <!-- MODAL REGISTRAR -->
 
                     <div class="modal fade" id="modal-info">
                         <div class="modal-dialog">
@@ -138,7 +138,7 @@
                                         <h4 class="modal-title text-center "> AGREGAR TIPO DE DOCUMENTO </h4>
                                     </div>
                                     <div class="modal-body">
-                                      <div class="input-group">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Documento</span>
                                             <input type="text" class="form-control" placeholder="Documento Cliente">
                                         </div>
@@ -208,18 +208,33 @@
             }
         </script>
         <script>
-            $(function () {
-                $('#example3').DataTable()
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
-                })
-            })</script>  
+            $(document).ready(function () {
+                var table = $('#example3').DataTable({
+                    responsive: true,
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        ['10 Filas', '25 Filas', '50 Filas', 'Todos']
+                    ],
+                });
 
+                new $.fn.dataTable.FixedHeader(table);
+            });
+        </script>
+        <!-- <script>
+             $(function () {
+                 $('#example3').DataTable();
+                 $('#example2').DataTable({
+                     'paging': true,
+                     'lengthChange': false,
+                     'searching': false,
+                     'ordering': true,
+                     'info': true,
+                     'autoWidth': false
+                 });
+             });</script>  -->
 
     </body>
 </html>

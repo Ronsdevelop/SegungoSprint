@@ -79,8 +79,9 @@
                                                     <td width='5'><%= Cli.getFono()%></td>
                                                     <td width='5'><%= Cli.getEmail()%></td>                                             
                                                     <td> 
+                                        
 
-                                                        <button type="button" onclick="showModalEdit('<%= Cli.getCod_cliente()%>', '<%= Cli.getNombres()%>','<%= Cli.getApellidos()%>','<%= Cli.getRasonsocial()%>','<%= TipoDocDAO.getDoc(Cli.getTipo_doc())%>','<%= Cli.getDocumento()%>','<%= Cli.getDireccion()%>','<%= Cli.getFono()%>','<%= Cli.getEmail()%>')" class="btn btn-success btn-sm">
+                                                        <button type="button" onclick="showModalEdit('<%= Cli.getCod_cliente()%>', '<%= Cli.getNombres()%>', '<%= Cli.getApellidos()%>', '<%= Cli.getRasonsocial()%>', '<%= TipoDocDAO.nroFila(TipoDocDAO.getDoc(Cli.getTipo_doc()))%>', '<%= Cli.getDocumento()%>', '<%= Cli.getDireccion()%>', '<%= Cli.getFono()%>', '<%= Cli.getEmail()%>')" class="btn btn-success btn-sm">
                                                             <span Class="glyphicon glyphicon-edit"></span>
                                                         </button>
 
@@ -193,7 +194,7 @@
                                         <span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title text-center" id="tituloEdit"></h4>
                                 </div>
-                                <form action="../#" method="POST">
+                                <form action="../ServletModificaCliente" method="POST">
                                     <div class="modal-body">
 
                                         <div class="input-group">
@@ -274,7 +275,7 @@
                 document.getElementById("nombreEdit").value = nombre;
                 document.getElementById("apellidoEdit").value = apellido;
                 document.getElementById("rasonEdit").value = rason;
-                document.getElementById("documentoEdit").value = tipdoc;
+                document.getElementById("documentoEdit").selectedIndex = tipdoc;
                 document.getElementById("nrodocEdit").value = doc;
                 document.getElementById("direccionEdit").value = dire;
                 document.getElementById("telefonoEdit").value = tel;
@@ -284,18 +285,37 @@
 
             }
         </script>
+
         <script>
-            $(function () {
-                $('#example3').DataTable();
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
+            $(document).ready(function () {
+                var table = $('#example3').DataTable({
+                    responsive: true,
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        ['10 Filas', '25 Filas', '50 Filas', 'Todos']
+                    ],
                 });
-            });</script>  
+
+                new $.fn.dataTable.FixedHeader(table);
+            });
+        </script>
+        <!--
+                <script>
+                    $(function () {
+                        $('#example3').DataTable();
+                        $('#example2').DataTable({
+                            'paging': true,
+                            'lengthChange': false,
+                            'searching': false,
+                            'ordering': true,
+                            'info': true,
+                            'autoWidth': false
+                        });
+                    });</script>  
+        -->
     </body>
 </html>
 <% } else {

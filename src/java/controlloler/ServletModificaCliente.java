@@ -5,6 +5,7 @@
  */
 package controlloler;
 
+import dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Richard
+ * @author GRUPO FUMINSUMOS SAC
  */
-@WebServlet(name = "ServIngresaCliente", urlPatterns = {"/ServIngresaCliente"})
-public class ServIngresaCliente extends HttpServlet {
+@WebServlet(name = "ServletModificaCliente", urlPatterns = {"/ServletModificaCliente"})
+public class ServletModificaCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,17 +31,17 @@ public class ServIngresaCliente extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+                        throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServIngresaCliente</title>");            
+            out.println("<title>Servlet ServletModificaCliente</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServIngresaCliente at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletModificaCliente at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +58,7 @@ public class ServIngresaCliente extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+                        throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -71,8 +72,8 @@ public class ServIngresaCliente extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+                        throws ServletException, IOException {
+        String cod = request.getParameter("cod");
         String nombres = request.getParameter("nom");
         String apellido = request.getParameter("ape");
         String razon_social = request.getParameter("raz");
@@ -82,6 +83,7 @@ public class ServIngresaCliente extends HttpServlet {
         String telefono = request.getParameter("tel");
         String email = request.getParameter("ema");
         model.Cliente cli = new model.Cliente();
+        cli.setCod_cliente(cod);
         cli.setNombres(nombres);
         cli.setApellidos(apellido);
         cli.setRasonsocial(razon_social);
@@ -90,20 +92,17 @@ public class ServIngresaCliente extends HttpServlet {
         cli.setDireccion(direccion);
         cli.setFono(telefono);
         cli.setEmail(email);
-        if (dao.ClienteDAO.RegistrarCliente(cli)) {
-            request.setAttribute("mensaje", "Registrado CORRECTAMENTE");
+        if (ClienteDAO.ModificaCliente(cli)) {
+            request.setAttribute("mensaje", "Modificado CORRECTAMENTE");
         } else {
-            request.setAttribute("mensaje", "ERROR al Registrar");
+            request.setAttribute("mensaje", "ERROR al Modificar");
         }
         response.sendRedirect("vistas/Clientes.jsp");
-
+        
+        
+        processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

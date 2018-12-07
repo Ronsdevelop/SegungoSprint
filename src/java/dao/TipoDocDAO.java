@@ -149,5 +149,30 @@ public class TipoDocDAO {
 
         }
     }
+    
+    public static int nroFila(String doc){
+        
+        Connection con = Conexion.conectar();
+        try {
+            PreparedStatement sp = con.prepareStatement("{call sp_DevuelveFila(?)}");           
+            sp.setString(1, doc);
+             ResultSet rs = sp.executeQuery();
+             if (rs.next()) {
+                 return rs.getInt(1);
+                
+            }
+             return 0;
+            
+        } catch (Exception e) {
+            return 0;
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
 
 }

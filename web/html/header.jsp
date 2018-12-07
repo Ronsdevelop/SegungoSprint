@@ -3,9 +3,9 @@
 <%@page import="model.Empleados"%>
 
 
-<% Empleados E = (Empleados)session.getAttribute("user"); %>
+<% Empleados E = (Empleados) session.getAttribute("user"); %>
 <% Consultas c = new Consultas(); %>
-<% TipoEmpleado T = c.getCargo(E.getCod_tipoem()); %>
+<% TipoEmpleado T = c.getCargo(E.getCod_tipoem());%>
 
 <header class="main-header">
     <!-- Logo -->
@@ -16,21 +16,22 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
 
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- Messages: style can be found in dropdown.less-->
-
-                <!-- Notifications: style can be found in dropdown.less -->
-
-                <!-- Tasks: style can be found in dropdown.less -->
 
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="../Publico/dist/img/avatar5.png" class="user-image" alt="User Image">
-                        <span class="hidden-xs"><%=T.getTempleado() %></span>
+                        <span class="hidden-xs"><%=T.getTempleado()%></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -38,7 +39,7 @@
                             <img src="../Publico/dist/img/avatar5.png" class="img-circle" alt="User Image">
 
                             <p>
-                                <%= E.getNombres() +" " + E.getApellidos() %>
+                                <%= E.getNombres() + " " + E.getApellidos()%>
                                 <small>Noviembre 2018</small>
                             </p>
                         </li>
@@ -77,14 +78,14 @@
                     <i class="fa fa-home"></i> <span>Inicio</span>
                 </a>
             </li>
-                             
- 
-       
+
+
+
             <li><a href="recepcion.jsp"><i class="fa fa-bed"></i> <span>Recepcion</span></a></li>
             <li><a href="reservas.jsp"><i class="fa fa-calendar"></i> <span>Reservas</span></a></li>
             <li><a href="Clientes.jsp"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
             <li><a href="#"><i class="fa fa-money"></i> <span>Modulo Caja</span></a></li>
-            
+
             <li class="treeview">
                 <a href="#"><i class="fa fa-bank"></i> <span>Habitaciones</span>
                     <span class="pull-right-container">
@@ -98,8 +99,8 @@
                     <li><a href="estadohabitacion.jsp">Estados</a></li>
                 </ul>
             </li>
-            <% if(T.getCod_temp() == 1){ %>  
-               
+            <% if (T.getCod_temp() == 1) { %>  
+
 
             <li class="treeview">
                 <a href="#"><i class="fa fa-cog"></i> <span>Administracion</span>
@@ -115,8 +116,8 @@
 
                 </ul>
             </li>
-            
-             <%}%>
+
+            <%}%>
         </ul>
     </section>
     <!-- /.sidebar -->

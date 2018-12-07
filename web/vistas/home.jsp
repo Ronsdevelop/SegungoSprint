@@ -114,14 +114,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box">
-                                 <h2 class="container-fluid bg-blue-active text-white text-center mh-50">
+                                <h2 class="container-fluid bg-blue-active text-white text-center mh-50">
 
-                                        LISTA DE HABITACIONES OCUPADAS
-                                    </h2>
+                                    LISTA DE HABITACIONES OCUPADAS
+                                </h2>
 
                                 <!-- /.box-header -->
                                 <div class="box-body">
-                                    <table id="" class="table table-bordered table-striped">
+                                    <table id="example3" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="bg-green-active" border="1">
                                                 <th>#</th>
@@ -215,6 +215,27 @@
 
         </div>
         <jsp:include page="../html/scripts.html"  />
+
+        <script>
+            $(document).ready(function () {
+                var table = $('#example3').DataTable({
+                    responsive: true,
+                    searching: false,
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        ['10 Filas', '25 Filas', '50 Filas', 'Todos']
+                    ],
+
+                });
+
+                new $.fn.dataTable.FixedHeader(table);
+            });
+        </script>
+
+        <!--
         <script>
             $(function () {
                 $('#example1').DataTable()
@@ -226,7 +247,7 @@
                     'info': true,
                     'autoWidth': false
                 })
-            })</script>  
+            })</script>  -->
 
     </body>
 </html>

@@ -39,52 +39,52 @@
                         <div class="col-xs-12">                       
 
 
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Vista General de Niveles</h3>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body">  
-                                        <div class="col-xs-8 " >
-
-                                            <table   id="example3" class="table table-bordered table-striped" style="table-layout:fixed">
-                                                <thead>
-                                                    <tr class="bg-primary" border="1">
-                                                        <th>CODIGO</th>
-                                                        <th>NIVEL</th>
-                                                        <th width="200">ACCIONES</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <%for (Niveles th : NivelDAO.listarniveles()) {%> 
-                                                    <tr>
-                                                        <td width='5'><%= th.getCod_nivel()%></td>
-                                                        <td width='5'><%= th.getNom_nivel()%></td>
-                                                        <td>                                                         
-                                                            <button type="button"  onclick="showModalEdit('<%= th.getCod_nivel()%>', '<%= th.getNom_nivel()%>')" class="btn btn-success btn-sm">
-                                                                <span Class="glyphicon glyphicon-edit"></span>
-                                                            </button>
-
-
-                                                            <a href="../Servleteliminarnivel?cod=<%= th.getCod_nivel()%>">
-                                                                <button type="button" class="btn btn-danger btn-sm">
-                                                                    <span Class="glyphicon glyphicon-trash"></span>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <%}%> 
-
-
-                                                </tbody>                                       
-                                            </table>
-                                        </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                    <!-- /.box -->
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Vista General de Niveles</h3>
                                 </div>
-                                <!-- /.col -->
-                        
+                                <!-- /.box-header -->
+                                <div class="box-body">  
+                                    <div class="col-xs-8 " >
+
+                                        <table   id="example3" class="table table-bordered table-striped" style="table-layout:fixed">
+                                            <thead>
+                                                <tr class="bg-primary" border="1">
+                                                    <th>CODIGO</th>
+                                                    <th>NIVEL</th>
+                                                    <th width="200">ACCIONES</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%for (Niveles th : NivelDAO.listarniveles()) {%> 
+                                                <tr>
+                                                    <td width='5'><%= th.getCod_nivel()%></td>
+                                                    <td width='5'><%= th.getNom_nivel()%></td>
+                                                    <td>                                                         
+                                                        <button type="button"  onclick="showModalEdit('<%= th.getCod_nivel()%>', '<%= th.getNom_nivel()%>')" class="btn btn-success btn-sm">
+                                                            <span Class="glyphicon glyphicon-edit"></span>
+                                                        </button>
+
+
+                                                        <a href="../Servleteliminarnivel?cod=<%= th.getCod_nivel()%>">
+                                                            <button type="button" class="btn btn-danger btn-sm">
+                                                                <span Class="glyphicon glyphicon-trash"></span>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <%}%> 
+
+
+                                            </tbody>                                       
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+
 
                         </div>
                     </div>
@@ -176,19 +176,35 @@
             }
         </script>
 
-
         <script>
-            $(function () {
-                $('#example3').DataTable();
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
+            $(document).ready(function () {
+                var table = $('#example3').DataTable({
+                    responsive: true,
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                    },
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        ['10 Filas', '25 Filas', '50 Filas', 'Todos']
+                    ],
                 });
-            });</script>  
+
+                new $.fn.dataTable.FixedHeader(table);
+            });
+        </script>
+
+        <!-- <script>
+             $(function () {
+                 $('#example3').DataTable();
+                 $('#example2').DataTable({
+                     'paging': true,
+                     'lengthChange': false,
+                     'searching': false,
+                     'ordering': true,
+                     'info': true,
+                     'autoWidth': false
+                 });
+             });</script>  -->
     </body>
 </html>
 
