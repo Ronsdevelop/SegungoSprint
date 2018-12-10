@@ -126,18 +126,19 @@ public class TipoDocDAO {
 
     }
 
-    public static boolean EliminaDoc(DocumentoCliente doc) {
+    public static boolean EliminaDoc(model.DocumentoCliente doc) {
         Connection con = Conexion.conectar();
-        try {
-            PreparedStatement ps = con.prepareStatement("{call sp_EliminaDocCliente(?)}");
-            ps.setString(1, doc.getCod_tipodoc());
-            if (ps.executeUpdate() > 0) {
+        try {       
+           
+            CallableStatement sp = con.prepareCall("{call sp_EliminaDocCliente(?)}");
+            sp.setString(1, doc.getCod_tipodoc());
+            if (sp.executeUpdate() > 0) {
                 return true;
             } else {
                 return false;
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         } finally {
             if (con != null) {

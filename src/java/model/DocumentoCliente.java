@@ -5,6 +5,7 @@ package model;
 public class DocumentoCliente {
 
     private String cod_tipodoc;
+    private String tipodocum;
 
     public DocumentoCliente() {
         this.cod_tipodoc = "";
@@ -15,7 +16,7 @@ public class DocumentoCliente {
         this.cod_tipodoc = cod_tipodoc;
         this.tipodocum = tipodocum;
     }
-    private String tipodocum;
+
 
     public String getCod_tipodoc() {
         return cod_tipodoc;

@@ -24,7 +24,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                       <i class="fa fa-home"></i>  PRINCIPAL
+                        <i class="fa fa-home"></i>  PRINCIPAL
 
                     </h1>
                     <ol class="breadcrumb">

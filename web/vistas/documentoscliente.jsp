@@ -54,7 +54,7 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        <table id="example3" class="table table-bordered table-striped" style="table-layout:fixed">
+                                        <table id="example3" class="table table-bordered table-striped" >
                                             <thead>
                                                 <tr class="bg-primary" border="1">
                                                     <th>CODIGO</th>

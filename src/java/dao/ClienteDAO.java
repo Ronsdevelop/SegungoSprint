@@ -127,8 +127,8 @@ public class ClienteDAO {
     public static boolean ModificaCliente(model.Cliente cli) {
         Connection con = Conexion.conectar();
         try {
-            CallableStatement cs = null;
-            PreparedStatement ps = con.prepareStatement("{call sp_ActualizaCliente(?,?,?,?,?,?,?,?,?)}");
+       
+            PreparedStatement ps = con.prepareCall("{call sp_ActualizaCliente(?,?,?,?,?,?,?,?,?)}");
             ps.setString(1, cli.getCod_cliente());
             ps.setString(2, cli.getNombres());
             ps.setString(3, cli.getApellidos());

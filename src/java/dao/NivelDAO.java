@@ -12,7 +12,7 @@ public class NivelDAO {
     public static boolean registrarNivel(model.Niveles n) {
         Connection con = Conexion.conectar();
         try {
-            CallableStatement cs = null;
+           
           
             PreparedStatement sp = con.prepareStatement("{call sp_IngresaNivel(?)}");
             sp.setString(1, n.getNom_nivel());

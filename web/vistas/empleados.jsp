@@ -49,7 +49,7 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        <table style="table-layout:fixed" id="example3" class="table table-bordered table-striped">
+                                        <table  id="example3" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-primary" border="1">
 
@@ -72,7 +72,7 @@
                                                 <tr>
                                                     <td width='5'><%= emp.getCod_empleados()%></td>
                                                     <td width='5'><%= emp.getNombres()%></td>
-                                                    <td width='5'><%=  T.Cod_Tipo(emp.getCod_tipoem()) %></td>
+                                                    <td width='5'><%=  T.Cod_Tipo(emp.getCod_tipoem())%></td>
                                                     <td width='5'><%= emp.getApellidos()%></td>
                                                     <td width='5'><%= emp.getDni()%></td>
                                                     <td width='5'><%= emp.getUsername()%></td> 
@@ -215,7 +215,7 @@
             <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />
-    <script>
+        <script>
             $(document).ready(function () {
                 var table = $('#example3').DataTable({
                     responsive: true,
@@ -231,18 +231,18 @@
                 new $.fn.dataTable.FixedHeader(table);
             });
         </script>
-       <!-- <script>
-            $(function () {
-                $('#example3').DataTable();
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
-                });
-            });</script>  -->
+        <!-- <script>
+             $(function () {
+                 $('#example3').DataTable();
+                 $('#example2').DataTable({
+                     'paging': true,
+                     'lengthChange': false,
+                     'searching': false,
+                     'ordering': true,
+                     'info': true,
+                     'autoWidth': false
+                 });
+             });</script>  -->
     </body>
 </html>
 <% } else {

@@ -75,9 +75,9 @@ public class TEmpleadoDAO {
     public static boolean EliminaTipoEmp(model.TipoEmpleado tp) {
         Connection con = Conexion.conectar();
         try {
-            CallableStatement cs = null;
+        
 
-            CallableStatement sp = con.prepareCall("{call sp_eliminatipoempleados(?)}");
+            CallableStatement sp = con.prepareCall("{call sp_EliminaTipoEmpleado(?)}");
             sp.setInt(1, tp.getCod_temp());
 
             if (sp.executeUpdate() > 0) {
@@ -124,9 +124,9 @@ public class TEmpleadoDAO {
     public static boolean ModificaTipoEm(model.TipoEmpleado TP) {
         Connection con = Conexion.conectar();
         try {
-            CallableStatement cs = null;
+      
 
-            PreparedStatement ps = con.prepareStatement("{call sp_modificatipoempleados(?,?,?)}");
+            CallableStatement ps = con.prepareCall("{call sp_ActualizaTipoEmpleado(?,?)}");
             ps.setInt(1, TP.getCod_temp());
             ps.setString(2, TP.getTempleado());
 

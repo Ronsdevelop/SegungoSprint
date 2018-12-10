@@ -75,7 +75,7 @@ public class ServModificaTipo extends HttpServlet {
             throws ServletException, IOException {        
         int cod = Integer.parseInt(request.getParameter("cod"));
         String tipo_empleo = request.getParameter("tipo");
-        String descripcion = request.getParameter("des");
+ 
         TipoEmpleado tp = new TipoEmpleado();
         tp.setCod_temp(cod);
         tp.setTempleado(tipo_empleo);
@@ -86,7 +86,7 @@ public class ServModificaTipo extends HttpServlet {
         }else{
              request.setAttribute("mensaje", "ERROR al Modificar"); 
         }  
-        response.sendRedirect("vistas/tipohabitacion.jsp");
+        response.sendRedirect("vistas/tipoempleado.jsp");
     }
 
     /**

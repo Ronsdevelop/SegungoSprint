@@ -10,7 +10,7 @@
 <html>
     <head>
 
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+   
         <jsp:include page="../html/head.jsp" />
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -130,7 +130,7 @@
                     <!-- MODAL EDITAR -->
                     <div class="modal fade" id="modalEdit">
                         <div class="modal-dialog">
-                            <form action="../#" method="POST">
+                            <form action="../Servletmodificanivel" method="POST">
                                 <div class="modal-content">
 
                                     <div class="modal-header bg-green ">
@@ -139,7 +139,7 @@
                                     <div class="modal-body">
                                         <div class="input-group">
                                             <span class="input-group-addon">Codigo</span>
-                                            <input type="text" class="form-control" name="niv" id="codigoEdit" readonly="readonly" placeholder="Codigo">
+                                            <input type="text" class="form-control" name="cod" id="codigoEdit" readonly="readonly" placeholder="Codigo">
                                         </div>
                                         <br>                                        
                                         <div class="input-group">

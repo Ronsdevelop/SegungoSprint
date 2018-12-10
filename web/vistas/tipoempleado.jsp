@@ -53,7 +53,7 @@
                                                 <tr class="bg-primary" border="1">
                                                     <th>CODIGO</th>
                                                     <th>TIPO EMPLEADO</th>
-                                              
+
                                                     <th>OPERACIONES</th>
                                                 </tr>
                                             </thead>
@@ -62,14 +62,12 @@
                                                 <tr>
                                                     <td width='5'><%= temp.getCod_temp()%></td>
                                                     <td width='5'><%= temp.getTempleado()%></td>
-                                               
+
                                                     <td> 
 
-                                                        <a href="#?cod=<%= temp.getCod_temp()%>">
-                                                            <button type="button" class="btn btn-success btn-sm">
-                                                                <span Class="glyphicon glyphicon-edit"></span>
-                                                            </button>
-                                                        </a>
+                                                        <button type="button"  onclick="showModalEdit('<%= temp.getCod_temp()%>', '<%= temp.getTempleado()%>')" class="btn btn-success btn-sm">
+                                                            <span Class="glyphicon glyphicon-edit"></span>
+                                                        </button>
 
                                                         <a href="../ServEliminaTipo?cod=<%= temp.getCod_temp()%>">
                                                             <button type="button" class="btn btn-danger btn-sm">
@@ -102,6 +100,8 @@
                         </div>  
                     </div>
 
+                    <!-- MODAL REGISTRAR -->
+
                     <div class="modal modal-info fade" id="modal-info">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -119,7 +119,7 @@
                                                     <input type="text" class="form-control" name="tip" required> 
                                                 </td> 
                                             </tr>
-                                         
+
 
                                         </table>
 
@@ -134,6 +134,36 @@
 
                         </div>
                     </div>
+                    <!-- MODAL EDITAR -->
+                    <div class="modal fade" id="modalEdit">
+                        <div class="modal-dialog">
+                            <form action="../ServModificaTipo" method="POST">
+                                <div class="modal-content">
+
+                                    <div class="modal-header bg-green ">
+                                        <h4 class="modal-title text-center" id="tituloEdit"></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Codigo</span>
+                                            <input type="text" class="form-control" name="cod" id="codigoEdit" readonly="readonly" placeholder="Codigo">
+                                        </div>
+                                        <br>                                        
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nivel</span>
+                                            <input type="text" class="form-control" name="tipo" id="nombreEdit" placeholder="Nivel">
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer bg-green" >
+                                        <button type="submit" name="action" id="#" class="btn btn-primary pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
 
                     <!-- /.row -->
@@ -141,9 +171,19 @@
                 <!-- /.content -->
 
             </div>
-                                                <jsp:include page="../html/footer.jsp" />
+            <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />
+
+        <script>
+            function showModalEdit(clave, nombre) {
+                document.getElementById("codigoEdit").value = clave;
+                document.getElementById("nombreEdit").value = nombre;
+                document.getElementById("tituloEdit").innerHTML = "EDITAR REGISTRO " + clave;
+                $('#modalEdit').modal('show');
+
+            }
+        </script>
         <script>
             $(document).ready(function () {
                 var table = $('#example3').DataTable({
@@ -160,18 +200,18 @@
                 new $.fn.dataTable.FixedHeader(table);
             });
         </script>
-       <!-- <script>
-            $(function () {
-                $('#example3').DataTable();
-                $('#example2').DataTable({
-                    'paging': true,
-                    'lengthChange': false,
-                    'searching': false,
-                    'ordering': true,
-                    'info': true,
-                    'autoWidth': false
-                });
-            });</script>  -->
+        <!-- <script>
+             $(function () {
+                 $('#example3').DataTable();
+                 $('#example2').DataTable({
+                     'paging': true,
+                     'lengthChange': false,
+                     'searching': false,
+                     'ordering': true,
+                     'info': true,
+                     'autoWidth': false
+                 });
+             });</script>  -->
     </body>
 </html>
 <% } else {

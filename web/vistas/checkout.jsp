@@ -63,7 +63,7 @@
                                     if (hab.getValueAt(h, 1).equals(niv.getValueAt(i, 1)) && hab.getValueAt(h, 2).equals(es.getValueAt(canes, 0)) && (es.getValueAt(canes, 1).equals("OCUPADA"))) {
                                         
                                         String num = hab.getValueAt(h, 0).toString();
-                                        ArrayList<String> list = new Consultas().RegistroEntrada(num);
+                                        ArrayList<String> list = new Consultas().RegistroEntrada("101");
                                         String dato1 = list.get(0);
                                         String dato2 = list.get(1);
                                         String dato3 = list.get(2);

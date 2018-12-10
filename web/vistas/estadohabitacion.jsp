@@ -44,7 +44,7 @@
                                     <div class="box-body">
                                
 
-                                        <table style="table-layout:fixed" id="example3" class="table table-bordered table-striped">
+                                        <table  id="example3" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-primary" border="1">
                                                     <th>CODIGO</th>
