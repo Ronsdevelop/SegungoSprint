@@ -45,6 +45,9 @@
                         DefaultTableModel niv = new DefaultTableModel();
                         niv = v.Listaniveles(cn.conectar());
 
+                        DefaultTableModel RS = new DefaultTableModel();
+                        RS = v.RegistroEntrada(cn.conectar());
+
                         DefaultTableModel hab = new DefaultTableModel();
                         hab = v.Lishabitacion(cn.conectar());
 
@@ -61,14 +64,7 @@
                                 for (int h = 0; h < dao.HabitacionDAO.CantHabitacion(); h++) {
 
                                     if (hab.getValueAt(h, 1).equals(niv.getValueAt(i, 1)) && hab.getValueAt(h, 2).equals(es.getValueAt(canes, 0)) && (es.getValueAt(canes, 1).equals("OCUPADA"))) {
-                                        
-                                        String num = hab.getValueAt(h, 0).toString();
-                                        ArrayList<String> list = new Consultas().RegistroEntrada("101");
-                                        String dato1 = list.get(0);
-                                        String dato2 = list.get(1);
-                                        String dato3 = list.get(2);
-                                        String dato4 = list.get(3);
-                                     
+
                                         out.print("<div class='col-lg-3 col-x6'>");
                                         out.print("<div class='small-box bg-yellow'>");
                                         out.print("<div class='inner'>");
@@ -79,7 +75,17 @@
                                         out.print("<div class='icon'  >");
                                         out.print("<i class='fa fa-hotel'></i>");
                                         out.print("</div>");
-                                        out.print("<a href='#' onclick='showModalEdit(\"" + hab.getValueAt(h, 0) + "\",\"" + dato1 +"\",\"" + dato2 + "\",\"" + dato3 + "\",\"" + dato4 + "\")' class='small-box-footer'> CHECK OUT <i class='fa fa-arrow-circle-right'></i></a>");
+                                        for (int r = 0; r < RS.getRowCount(); r++) {
+                                            
+                                            if (hab.getValueAt(h, 0).equals(RS.getValueAt(r, 4)) ) {
+                                                   out.print("<a href='#' onclick='showModalEdit(\"" + hab.getValueAt(h, 0) + "\",\"" + RS.getValueAt(r, 0) + "\",\"" + RS.getValueAt(r, 1) + "\",\"" + RS.getValueAt(r, 2) + "\",\"" + RS.getValueAt(r, 3) + "\")' class='small-box-footer'> CHECK OUT <i class='fa fa-arrow-circle-right'></i></a>");  
+                                                } //else{
+                                                 //out.print("<a href='#' onclick='showModalEdit(\"" + hab.getValueAt(h, 0) + "\",\"" + RS.getValueAt(r, 0) + "\",\"" + RS.getValueAt(r, 1) + "\",\"" + RS.getValueAt(r, 2) + "\",\"" + RS.getValueAt(r, 3) + "\")' class='small-box-footer'> CHECK OUT <i class='fa fa-arrow-circle-right'></i></a>");  
+                                            //}
+                                           
+
+                                        }
+
                                         out.print("</div>");
                                         out.print("</div>");
                                     }
@@ -94,7 +100,7 @@
 
                     <div class="modal fade" id="modalEdit">
                         <div class="modal-dialog">
-                            <form class="form-horizontal" method="post" id="cliente_form" action="../ServletRegistrarHabitacion">
+                            <form class="form-horizontal" method="post" id="cliente_form" action="../ServletIngresaRegSalida">
                                 <div class="modal-content">
                                     <div class="modal-header bg-yellow  ">
                                         <h3 class="modal-title text-center" id="tituloEdit"></h3>
@@ -112,12 +118,12 @@
                                         <br>                                      
                                         <div class="input-group ">
                                             <span class="input-group-addon">Fecha Ingreso</span>
-                                            <input type="date" class="form-control" name="fecha"  id="fechaRegi"  readonly="readonly">
+                                            <input type="date" class="form-control"   id="fechaRegi"  readonly="readonly">
                                         </div>
                                         <br>
                                         <div class="input-group ">
                                             <span class="input-group-addon">Hora de Ingreso</span>
-                                            <input type="time" class="form-control" name="hora" id="horaRegi"    placeholder="Hora Ingreso" readonly="readonly">
+                                            <input type="time" class="form-control"  id="horaRegi"    placeholder="Hora Ingreso" readonly="readonly">
                                         </div> 
                                         <br>
                                         <div class="input-group ">

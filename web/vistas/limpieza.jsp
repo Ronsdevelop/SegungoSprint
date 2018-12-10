@@ -26,11 +26,11 @@
                 <!-- Content Header (Page header) -->
                 <section  class="content-header">
                     <h1>
-                        <i class="fa fa-bed"></i> RECEPCION
+                        <i class="fa fa-bed"></i> AREA DE LIMPIEZA
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                        <li><a href="#">Recepcion</a></li>
+                        <li><a href="#">Limpieza</a></li>
 
                     </ol>
                 </section>
@@ -57,31 +57,20 @@
 
                                 for (int h = 0; h < dao.HabitacionDAO.CantHabitacion(); h++) {
 
-                                    if (hab.getValueAt(h, 1).equals(niv.getValueAt(i, 1)) && hab.getValueAt(h, 2).equals(es.getValueAt(canes, 0))) {
+                                    if (hab.getValueAt(h, 1).equals(niv.getValueAt(i, 1)) && hab.getValueAt(h, 2).equals(es.getValueAt(canes, 0)) && (es.getValueAt(canes, 1).equals("LIMPIEZA"))) {
                                         out.print("<div class='col-lg-3 col-x6'>");
-                                        if (es.getValueAt(canes, 1).equals("DISPONIBLE")) {
-                                            out.print("<div class='small-box bg-aqua'>");
-                                        } else if (es.getValueAt(canes, 1).equals("RESERVADA")) {
-                                            out.print("<div class='small-box bg-green'>");
-                                        } else if (es.getValueAt(canes, 1).equals("OCUPADA")) {
-                                            out.print("<div class='small-box bg-yellow'>");
-                                        }
-                                        else if (es.getValueAt(canes, 1).equals("LIMPIEZA")) {
-                                            out.print("<div class='small-box bg-gray-active'>");
-                                        }
-
+                                        out.print("<div class='small-box bg-gray-active'>");
                                         out.print("<div class='inner'>");
                                         out.print("<h3>" + hab.getValueAt(h, 0) + "</h3>");
-                                        out.print("<p  style='margin: 0 ;'>"+ TipoHabitacionDAO.getTipo(hab.getValueAt(h, 5).toString()) +"</p>");
-                                        out.print("<p style='margin: 0 ; '  > S/. "+ hab.getValueAt(h, 4) +"</p>");
+                                        out.print("<p  style='margin: 0 ;'>" + TipoHabitacionDAO.getTipo(hab.getValueAt(h, 5).toString()) + "</p>");
+                                        out.print("<p style='margin: 0 ; '  > S/. " + hab.getValueAt(h, 4) + "</p>");
                                         out.print("</div>");
                                         out.print("<div class='icon'  >");
                                         out.print("<i class='fa fa-hotel'></i>");
                                         out.print("</div>");
-                                        if (es.getValueAt(canes, 1).equals("DISPONIBLE")) {
-                                            out.print("<a href='#' onclick='showModalEdit(\"" + hab.getValueAt(h, 0) + "\",\"" + hab.getValueAt(h, 3) + "\")' class='small-box-footer'>" + es.getValueAt(canes, 1) + "  <i class='fa fa-arrow-circle-right'></i></a>");
-                                        }else{
-                                        out.print("<a  ' class='small-box-footer'>" + es.getValueAt(canes, 1) + " </a>");}
+
+                                        out.print("<a href='#' onclick='showModalEdit(\"" + hab.getValueAt(h, 0) + "\",\"" + hab.getValueAt(h, 3) + "\")' class='small-box-footer'>" + es.getValueAt(canes, 1) + "  <i class='fa fa-arrow-circle-right'></i></a>");
+
                                         out.print("</div>");
                                         out.print("</div>");
                                     }
@@ -110,35 +99,22 @@
                                             <input type="text" class="form-control" id="codigoEdit" name="cod" readonly="readonly"  >
                                         </div>
                                         <br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Cliente </span>
-                                            <select class="form-control"  name="clie" >
-                                                <option value="">-- Selecciona Cliente --</option>
-                                                <%for (Cliente Cli : ClienteDAO.listarClientes()) {%> 
-                                                <option value="<%= Cli.getCod_cliente()%>"> <%= Cli.getNombres() + " " + Cli.getApellidos()%></option>
-                                                <%}%> 
-                                            </select>
-                                        </div>
-                                        <br>
+                                     
                                         <div class="input-group ">
-                                            <span class="input-group-addon">Fecha Ingreso</span>
+                                            <span class="input-group-addon">Fecha Limpieza</span>
                                             <input type="date" class="form-control" name="fecha" >
                                         </div>
                                         <br>
                                         <div class="input-group ">
-                                            <span class="input-group-addon">Hora de Ingreso</span>
+                                            <span class="input-group-addon">Hora de Limpieza</span>
                                             <input type="time" class="form-control" name="hora" placeholder="Hora Ingreso">
                                         </div> 
-                                        <br>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon">Cantidad Adultos</span>
-                                            <input type="number" class="form-control" name="adul" placeholder="Cantidad de Adultos">
-                                        </div>
-                                        <br>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon">Cantidad Niños</span>
-                                            <input type="number" class="form-control" name="nin" placeholder="Cantidad de Niños">
-                                        </div>                                     
+                                        <br>                                       
+                                       
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Insidencias</span>
+                                            <textarea class="form-control "  name="insi" rows="3"></textarea>
+                                        </div>                                    
                                         <div class="input-group">                                           
                                             <input type="text" value="<%= E.getCod_empleados()%>" name="emp" style="visibility:hidden"  >
                                         </div>                                        
@@ -164,7 +140,7 @@
         <script>
             function showModalEdit(numero, codigo) {
                 document.getElementById("codigoEdit").value = codigo;
-                document.getElementById("tituloEdit").innerHTML = " REGISTRAR HABITACION " + numero;
+                document.getElementById("tituloEdit").innerHTML = " LIMPIEZA DE HABITACION " + numero;
                 $('#modalEdit').modal('show');
 
             }

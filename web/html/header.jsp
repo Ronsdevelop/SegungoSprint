@@ -86,6 +86,7 @@
             <li><a href="reservas.jsp"><i class="fa fa-calendar"></i> <span>Reservas</span></a></li>
             <li><a href="Clientes.jsp"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
             <li><a href="#"><i class="fa fa-money"></i> <span>Modulo Caja</span></a></li>
+            <li><a href="limpieza.jsp"><i class="fa fa-money"></i> <span>Limpieza</span></a></li>
 
             <li class="treeview">
                 <a href="#"><i class="fa fa-bank"></i> <span>Habitaciones</span>

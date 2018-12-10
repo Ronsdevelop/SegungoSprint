@@ -155,18 +155,18 @@ public class Consultas extends Conexion {
 
     }
 
-    public DefaultTableModel RegistroSalida(String num, Connection con) {
+    public DefaultTableModel RegistroEntrada(Connection con) {
         try {
             DefaultTableModel T;
-            String[] Titulos = {"cod_registro:", "cliente:", "fehaingreso:", "horaingreso:"};
-            Cst = con.prepareCall("call sp_retornaRegistroHabitacion(?);");
-            Cst.setString(1, num);
+            String[] Titulos = { "cod_registro:", "cliente:", "fehaingreso:", "horaingreso:","numero:"};
+            Cst = con.prepareCall("call sp_retornaRegistroHabitacion;");
+          
             con.setAutoCommit(false);
             R = Cst.executeQuery();
             T = new DefaultTableModel(null, Titulos);
             while (R.next()) {
-                Object dato[] = new Object[4];
-                for (int i = 0; i < 4; i++) {
+                Object dato[] = new Object[5];
+                for (int i = 0; i < 5; i++) {
                     dato[i] = R.getString(i + 1);
                 }
                 T.addRow(dato);
@@ -179,13 +179,13 @@ public class Consultas extends Conexion {
 
     }
 
-    public ArrayList<String> RegistroEntrada(String num) {
+    public ArrayList<String> RegistroEntrada2() {
         Connection con = Conexion.conectar();
         try {
 
             ResultSet res = null;
-            PreparedStatement pst = con.prepareStatement("{call sp_retornaRegistroHabitacion(?)}");
-            pst.setString(1, num);
+            PreparedStatement pst = con.prepareStatement("{call sp_retornaRegistroHabitacion}");
+        
             res = pst.executeQuery();
             ArrayList<String> list = new ArrayList<>();
             while (res.next()) {
