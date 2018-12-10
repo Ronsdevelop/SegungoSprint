@@ -35,10 +35,10 @@ public class EmpleadosDAO {
             ps.setInt(8, emp.getEstado());
             ps.setInt(9, emp.getCod_tipoem());
             if (ps.executeUpdate() > 0) {
-                con.close();
+         
                 return true;
             } else {
-                con.close();
+        
                 return false;
             }
         } catch (SQLException ex) {

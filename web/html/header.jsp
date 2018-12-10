@@ -82,6 +82,7 @@
 
 
             <li><a href="recepcion.jsp"><i class="fa fa-bed"></i> <span>Recepcion</span></a></li>
+            <li><a href="checkout.jsp"><i class="fa fa-sign-out"></i> <span>Check Out</span></a></li>
             <li><a href="reservas.jsp"><i class="fa fa-calendar"></i> <span>Reservas</span></a></li>
             <li><a href="Clientes.jsp"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
             <li><a href="#"><i class="fa fa-money"></i> <span>Modulo Caja</span></a></li>

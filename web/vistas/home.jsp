@@ -24,7 +24,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        PRINCIPAL
+                       <i class="fa fa-home"></i>  PRINCIPAL
 
                     </h1>
                     <ol class="breadcrumb">
@@ -41,7 +41,7 @@
                     <div class="row panel_modulos">
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-aqua">
+                            <div class="small-box bg-light-blue">
                                 <div class="inner">
                                     <h3><%= HabitacionDAO.CantHabitacion()%></h3>
 
@@ -82,7 +82,7 @@
                                 <div class="icon">
                                     <i class="fa fa-hotel"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">
+                                <a href="checkout.jsp" class="small-box-footer">
                                     Mas info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -90,7 +90,7 @@
 
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-light-blue">
+                            <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3><%= HabitacionDAO.HabDisponibles()%></h3>
 
@@ -121,16 +121,16 @@
 
                                 <!-- /.box-header -->
                                 <div class="box-body">
-                                    <table id="example3" class="table table-bordered table-striped">
+                                    <table id="example3" class="table table-bordered table-striped" style="table-layout: fixed">
                                         <thead>
                                             <tr class="bg-green-active" border="1">
-                                                <th>#</th>
+                                                <th width="20">#</th>
                                                 <th>Cliente </th>
-                                                <th>Nro Documento</th>
-                                                <th>Habitacion</th>
-                                                <th>Tipo</th>
-                                                <th>F. Ingreso</th>
-                                                <th>H. Ingreso</th>                                              
+                                                <th width="170">Nro Documento</th>
+                                                <th width="70">Habitacion</th>
+                                                <th width="120">Tipo</th>
+                                                <th width="80">F. Ingreso</th>
+                                                <th width="80">H. Ingreso</th>                                              
 
                                             </tr>
                                         </thead>

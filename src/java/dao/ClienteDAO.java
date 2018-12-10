@@ -114,7 +114,7 @@ public class ClienteDAO {
 
         } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -145,8 +145,7 @@ public class ClienteDAO {
             }
         } catch (SQLException ex) {
             return false;
-        }
-        finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -154,7 +153,7 @@ public class ClienteDAO {
                 }
             }
         }
-       
+
     }
 
     public static boolean eliminacliente(model.Cliente cli) {
@@ -171,7 +170,7 @@ public class ClienteDAO {
             }
         } catch (SQLException ex) {
             return false;
-        }finally {
+        } finally {
             if (con != null) {
                 try {
                     con.close();
@@ -180,5 +179,6 @@ public class ClienteDAO {
             }
         }
     }
+    
 
 }

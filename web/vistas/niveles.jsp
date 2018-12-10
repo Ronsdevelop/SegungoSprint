@@ -45,14 +45,14 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">  
-                                    <div class="col-xs-8 " >
+                                    <div class="col-xs-12 " >
 
-                                        <table   id="example3" class="table table-bordered table-striped" style="table-layout:fixed">
+                                        <table   id="example3" style="width:100%" class="table table-bordered table-striped" >
                                             <thead>
                                                 <tr class="bg-primary" border="1">
                                                     <th>CODIGO</th>
                                                     <th>NIVEL</th>
-                                                    <th width="200">ACCIONES</th>
+                                                    <th >ACCIONES</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

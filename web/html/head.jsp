@@ -19,9 +19,11 @@
 <link rel="stylesheet" href="../Publico/dist/css/skins/_all-skins.min.css">
 <link href="../Publico/propios/styles.css" rel="stylesheet" type="text/css"/>
 
-<!-- AGREGADOS RECIENTE-->
+<!-- TABLES RESPONSIVES -->
 <link href="../Publico/bower_components/datatables.net-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="../Publico/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+
 <!-- Google Font -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

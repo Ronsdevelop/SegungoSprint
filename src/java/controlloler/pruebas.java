@@ -15,13 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Richard
+ * @author Rony
  */
-
-
-
-@WebServlet(name = "Servletingresatipohabitacion", urlPatterns = {"/Servletingresatipohabitacion"})
-public class Servletingresatipohabitacion extends HttpServlet {
+@WebServlet(name = "pruebas", urlPatterns = {"/pruebas"})
+public class pruebas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class Servletingresatipohabitacion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servletingresatipohabitacion</title>");            
+            out.println("<title>Servlet pruebas</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servletingresatipohabitacion at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet pruebas at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,17 +72,33 @@ public class Servletingresatipohabitacion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nom = request.getParameter("nom");
-        String des = request.getParameter("des");
-        model.TipoHabitacion th = new model.TipoHabitacion();
-        th.setTipo_habitacion(nom);
-        th.setDescripcion(des);
-        if (dao.TipoHabitacionDAO.RegistrarTipoHabitacion(th)) {
-            request.setAttribute("mensaje", "Tipo_Habitacion REGISTRADA Corectamente");
-        }else{
-            request.setAttribute("mensaje", "Tipo_Habitacion ERROR al Registrar");
+        String clie = request.getParameter("clie");
+        String cod_hb = request.getParameter("cod");
+         String emp = request.getParameter("emp");
+        String fecha = request.getParameter("fecha");
+        String hora = request.getParameter("hora");
+        int adult = Integer.parseInt(request.getParameter("adul"));
+        int ninos = Integer.parseInt(request.getParameter("nin"));
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet pruebas</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1> " + clie + "</h1>");
+            out.println("<h1> " + cod_hb + "</h1>");
+            out.println("<h1> " + emp + "</h1>");
+            out.println("<h1> " + fecha+ "</h1>");
+            out.println("<h1> " + hora + "</h1>");
+            out.println("<h1> " + adult + "</h1>");
+            out.println("<h1> " + ninos + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-       response.sendRedirect("vistas/tipohabitacion.jsp");
+        
+      
     }
 
     /**
