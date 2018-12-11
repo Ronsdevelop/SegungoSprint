@@ -119,88 +119,76 @@
                         </div>  
                     </div>
 
-                    <div class="modal modal-info fade" id="modal-info">
+                    <div class="modal  fade" id="modal-info">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-primary">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Registrar Empleados</h4>
+                                    <h4 class="modal-title text-center">REGISTRAR EMPLEADOS</h4>
                                 </div>
                                 <form action="../ServEmpleado" method="POST">
                                     <div class="modal-body">
-                                        <table class="table">
-                                            <tr>
-                                                <td>
-                                                    <label for="#">Tipo_Empleado</label>
-                                                    <select class="form-control"  name="tem" id="">
-                                                        <option value="">-- Selecciona Tipo --</option>
-                                                        <%for (TipoEmpleado TP : TEmpleadoDAO.ListaTiposEm()) {%> 
-                                                        <option value="<%= TP.getCod_temp()%>"> <%= TP.getTempleado()%></option>
-                                                        <%}%> 
-                                                    </select>
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Nombres : </label>
-                                                    <input type="text" class="form-control" name="nom"> 
-                                                </td> 
-                                            </tr>
 
-                                            <tr>
-                                                <td>
-                                                    <label for="">Apellido : </label>
-                                                    <input type="text" class="form-control" name="ape"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Dni : </label>
-                                                    <input type="text" class="form-control" name="dni"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Usuario : </label>
-                                                    <input type="text" class="form-control" name="usu"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Password : </label>
-                                                    <input type="text" class="form-control" name="pas"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Telefono : </label>
-                                                    <input type="text" class="form-control" name="tel"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Email : </label>
-                                                    <input type="text" class="form-control" name="ema"> 
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label for="">Estado</label>
-                                                    <select class="form-control"  name="est">
-                                                        <option value="">-- Selecciona Estado --</option>
-                                                        <option value="1">ACTIVO</option>
-                                                        <option value="0">INACTIVO</option>
-                                                    </select>
-                                                </td> 
-                                            </tr>
-                                        </table>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Tipo Empleado</span>
+                                            <select class="form-control"  name="tem" id="">
+                                                <option value="">-- Selecciona Tipo --</option>
+                                                <%for (TipoEmpleado TP : TEmpleadoDAO.ListaTiposEm()) {%> 
+                                                <option value="<%= TP.getCod_temp()%>"> <%= TP.getTempleado()%></option>
+                                                <%}%> 
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
 
+                                            <span class="input-group-addon">Nombres</span>
+                                            <input type="text" class="form-control" name="nom" placeholder="Nombres de Empleado"> 
 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Apellidos</span>
+                                            <input type="text" class="form-control" name="ape" placeholder="Apellidos de Empleado"> 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Dni</span>
+                                            <input type="text" class="form-control" name="dni"  placeholder="Dni de Empleado"> 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Usuario</span>
+                                            <input type="text" class="form-control" name="usu"  placeholder="Uusuario de Empleado"> 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Password</span>
+                                            <input type="password" class="form-control" name="pas" placeholder="Password de Empleado"> 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Telefono</span>
+                                            <input type="text" class="form-control" name="tel" placeholder="Telefono de Empleado"> 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Email</span>
+                                            <input type="text" class="form-control" name="ema"  placeholder="Email de Empleado"> 
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Estado</span>
+                                            <select class="form-control"  name="est">
+                                                <option value="">-- Selecciona Estado --</option>
+                                                <option value="1">ACTIVO</option>
+                                                <option value="0">INACTIVO</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-outline">Guardar</button>
+                                    <div class="modal-footer bg-primary">
+                                          <button type="submit" name="action" id="#" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
                                     </div>
                                 </form>
                             </div>

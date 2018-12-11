@@ -30,6 +30,7 @@ CREATE TABLE `cliente` (
   `direccion` varchar(200) NOT NULL,
   `telefono` char(10) DEFAULT NULL,
   `email` varchar(200) DEFAULT NULL,
+  `estado` varchar(100) NOT NULL,
   PRIMARY KEY (`cod_cliente`),
   KEY `fk_Cliente_Tipo_DocCliente1_idx` (`cod_tipdoccl`),
   CONSTRAINT `fk_Cliente_Tipo_DocCliente1` FOREIGN KEY (`cod_tipdoccl`) REFERENCES `tipo_doccliente` (`cod_tipdoccl`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -37,7 +38,7 @@ CREATE TABLE `cliente` (
 
 /*Data for the table `cliente` */
 
-insert  into `cliente`(`cod_cliente`,`nombres`,`apellidos`,`rason_social`,`cod_tipdoccl`,`documento`,`direccion`,`telefono`,`email`) values ('CLI0000001','JUAN','RIOS AGUILERA','','D0001',48586868,'POR AHI','95886886','RONY@HOTMAIL.COM'),('CLI0000002','Claribel','Zegarra Galvez','soltera sin compromiso','D0001',72640644,'San Martin los olvidados de Dios ','935179422','clarizita@gmail.com'),('CLI0000003','Claudia ','Ruiz Chiroque','divorciada','D0001',74999199,'LAS MERCEDES 609','935179422','claudiaruizchiroque@gmail.com'),('CLI0000004','JUAN','PEREZ CANALES','','D0006',34858302,'LOS OLVIDADOS','98876554','email@hotmail');
+insert  into `cliente`(`cod_cliente`,`nombres`,`apellidos`,`rason_social`,`cod_tipdoccl`,`documento`,`direccion`,`telefono`,`email`,`estado`) values ('CLI0000001','JUAN','RIOS AGUILERA','','D0001',48586868,'POR AHI','95886886','RONY@HOTMAIL.COM','HOSPEDADO'),('CLI0000002','Claribel','Zegarra Galvez','soltera sin compromiso','D0001',72640644,'San Martin los olvidados de Dios ','935179422','clarizita@gmail.com','HOSPEDADO'),('CLI0000003','Claudia ','Ruiz Chiroque','divorciada','D0001',74999199,'LAS MERCEDES 609','935179422','claudiaruizchiroque@gmail.com','HOSPEDADO'),('CLI0000004','JUAN','PEREZ CANALES','','D0006',34858302,'LOS OLVIDADOS','98876554','email@hotmail','HOSPEDADO'),('CLI0000005','MARIA','ROCAS FEBRES','','D0001',27364656,'LOS AGARROBOS Y MAS','848757678','maria@hotmail.com','HOSPEDADO'),('CLI0000006','JESUS MARIA','RAMOS GARCIA','','D0001',46261585,'LOS OLVIDADOS','98876554','jesus@hotmail.com','HOSPEDADO');
 
 /*Table structure for table `detalle_producto` */
 
@@ -79,7 +80,7 @@ CREATE TABLE `empleados` (
 
 /*Data for the table `empleados` */
 
-insert  into `empleados`(`cod_empleados`,`nombres`,`apellidos`,`dni`,`username`,`password`,`telefono`,`email`,`estado`,`cod_tipoem`) values ('EMP0000001','RONY','AGUILERA RIVERA','46261585','Rony','123456','35445666','rony@hotmmail.com','',1),('EMP0000002','JORGE','ALVA MEJIA','364747575','Jorge','123456','45678899','jorge@hotmail.com','',2);
+insert  into `empleados`(`cod_empleados`,`nombres`,`apellidos`,`dni`,`username`,`password`,`telefono`,`email`,`estado`,`cod_tipoem`) values ('EMP0000001','RONY','AGUILERA RIVERA','46261585','Rony','123456','35445666','rony@hotmmail.com','',1),('EMP0000002','JORGE','ALVA MEJIA','364747575','Jorge','123456','45678899','jorge@hotmail.com','',2),('EMP0000003','RICHARD','ROA PRADO','475773737','Richard','123456','98876554','richard@hotmail.com','',6);
 
 /*Table structure for table `estado_habitacion` */
 
@@ -93,7 +94,7 @@ CREATE TABLE `estado_habitacion` (
 
 /*Data for the table `estado_habitacion` */
 
-insert  into `estado_habitacion`(`cod_estado`,`estado_habitacion`) values ('ETH01','DISPONIBLE'),('ETH02','RESERVADA'),('ETH03','OCUPADA');
+insert  into `estado_habitacion`(`cod_estado`,`estado_habitacion`) values ('ETH01','DISPONIBLE'),('ETH02','RESERVADA'),('ETH03','OCUPADA'),('ETH04','LIMPIEZA');
 
 /*Table structure for table `habitacion` */
 
@@ -118,7 +119,29 @@ CREATE TABLE `habitacion` (
 
 /*Data for the table `habitacion` */
 
-insert  into `habitacion`(`cod_habitacion`,`numero`,`precio`,`descripcion`,`cod_tipoh`,`cod_nivel`,`cod_estado`) values ('HAB0000001','101',200.00,'HABITACION CON AIRE ACONDICIONADO','TPH02','NIV01','ETH03'),('HAB0000002','102',234.00,'HABITACION CON RADIO','TPH02','NIV01','ETH03'),('HAB0000003','201',304.00,'HABITACION CON TV Y VENTILADOR','TPH01','NIV02','ETH03'),('HAB0000004','301',234.00,'HABITACION CON BAÃ?ERA','TPH01','NIV03','ETH03'),('HAB0000005','202',349.00,'HABITACION CON JACUZZY','TPH01','NIV02','ETH03'),('HAB0000006','103',200.00,'HABITACION CON CAMA QUEEN','TPH01','NIV01','ETH03'),('HAB0000007','203',150.00,'HABITACION PERSONAL','TPH02','NIV02','ETH01'),('HAB0000008','302',350.00,'HABITACION CON JACUZZY','TPH01','NIV03','ETH03'),('HAB0000009','303',300.00,'HABITACION CON JACUZZY','TPH01','NIV03','ETH01');
+insert  into `habitacion`(`cod_habitacion`,`numero`,`precio`,`descripcion`,`cod_tipoh`,`cod_nivel`,`cod_estado`) values ('HAB0000001','101',130.00,'HABITACION PERSONAL','TPH02','NIV01','ETH03'),('HAB0000002','102',140.00,'HABITACION CON BAÃ?ERA','TPH02','NIV01','ETH03'),('HAB0000003','201',200.00,'HABITACION CON JACUZZY','TPH01','NIV02','ETH01'),('HAB0000004','202',140.00,'HABITACION CON AIRE ACONDICIONADO','TPH02','NIV02','ETH04'),('HAB0000005','301',280.00,'HABITACION CON JACUZZY','TPH01','NIV03','ETH01'),('HAB0000006','401',250.00,'HABITACION CON CAMA QUEEN','TPH03','NIV04','ETH04'),('HAB0000007','501',123.00,'UNA DESCRIPCION','TPH01','NIV05','ETH03'),('HAB0000008','601',300.00,'HABITACION CON JACUZZY Y AIRE ACONDICIONADO','TPH04','NIV06','ETH01');
+
+/*Table structure for table `limpieza` */
+
+DROP TABLE IF EXISTS `limpieza`;
+
+CREATE TABLE `limpieza` (
+  `Cod_Limpieza` char(10) NOT NULL,
+  `cod_empleado` char(10) NOT NULL,
+  `fecha_Limpieza` date NOT NULL,
+  `hora_limpieza` time NOT NULL,
+  `Insidencias` varchar(200) DEFAULT NULL,
+  `cod_hab` char(10) NOT NULL,
+  PRIMARY KEY (`Cod_Limpieza`),
+  KEY `fk_Lim_Emple` (`cod_empleado`),
+  KEY `fk_Lim_Hab` (`cod_hab`),
+  CONSTRAINT `fk_Lim_Emple` FOREIGN KEY (`cod_empleado`) REFERENCES `empleados` (`cod_empleados`),
+  CONSTRAINT `fk_Lim_Hab` FOREIGN KEY (`cod_hab`) REFERENCES `habitacion` (`cod_habitacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `limpieza` */
+
+insert  into `limpieza`(`Cod_Limpieza`,`cod_empleado`,`fecha_Limpieza`,`hora_limpieza`,`Insidencias`,`cod_hab`) values ('RLP0000001','EMP0000001','2018-12-11','10:11:00','NINGUNA','HAB0000003'),('RLP0000002','EMP0000001','2018-12-11','12:12:00','nada','HAB0000001'),('RLP0000003','EMP0000003','2018-12-20','16:00:00','SE ENCONTRO  UN HILO','HAB0000007'),('RLP0000004','EMP0000001','2018-12-11','12:12:00','NINGUNA','HAB0000008');
 
 /*Table structure for table `nivel` */
 
@@ -132,7 +155,7 @@ CREATE TABLE `nivel` (
 
 /*Data for the table `nivel` */
 
-insert  into `nivel`(`cod_nivel`,`piso`) values ('NIV01','PRIMER PISO'),('NIV02','SEGUNDO PISO'),('NIV03','TERCER NIVEL'),('NIV04','CUARTO PISO');
+insert  into `nivel`(`cod_nivel`,`piso`) values ('NIV01','PRIMER PISO'),('NIV02','SEGUNDO PISO'),('NIV03','TERCER PISO'),('NIV04','CUARTO PISO'),('NIV05','QUINTO PISO'),('NIV06','SEXTO PISO');
 
 /*Table structure for table `pagos` */
 
@@ -203,7 +226,7 @@ CREATE TABLE `registro_habitacion` (
 
 /*Data for the table `registro_habitacion` */
 
-insert  into `registro_habitacion`(`cod_ventahab`,`cod_cliente`,`cod_habitacion`,`cod_empleados`,`fecha_ingreso`,`hora_ingreso`,`numero_adultos`,`numero_niños`,`cod_reserva`,`estado`) values ('RGH0000002','CLI0000004','HAB0000002','EMP0000001','2018-12-15','12:02:00',2,1,NULL,'INICIADO'),('RGH0000003','CLI0000002','HAB0000003','EMP0000001','2018-12-15','12:01:00',1,1,NULL,'INICIADO'),('RGH0000004','CLI0000003','HAB0000004','EMP0000001','2018-12-15','12:02:00',1,2,NULL,'INICIADO'),('RGH0000005','CLI0000001','HAB0000005','EMP0000001','2018-12-23','12:12:00',2,1,NULL,'INICIADO'),('RGH0000006','CLI0000001','HAB0000008','EMP0000001','2018-12-13','12:03:00',3,1,NULL,''),('RGH0000007','CLI0000004','HAB0000001','EMP0000001','2018-12-09','12:02:00',2,1,NULL,'CULMINADO'),('RGH0000008','CLI0000003','HAB0000006','EMP0000001','2018-12-09','10:12:00',1,2,NULL,'INICIADO'),('RGH000001','CLI0000001','HAB0000001','EMP0000001','2018-12-08','12:02:00',1,1,NULL,'INICIADO');
+insert  into `registro_habitacion`(`cod_ventahab`,`cod_cliente`,`cod_habitacion`,`cod_empleados`,`fecha_ingreso`,`hora_ingreso`,`numero_adultos`,`numero_niños`,`cod_reserva`,`estado`) values ('RGH0000001','CLI0000001','HAB0000001','EMP0000001','2018-12-10','10:12:00',1,2,NULL,'CULMINADO'),('RGH0000002','CLI0000002','HAB0000003','EMP0000001','2018-12-10','12:12:00',2,0,NULL,'CULMINADO'),('RGH0000003','CLI0000005','HAB0000004','EMP0000001','2018-12-11','10:00:00',2,1,NULL,'CULMINADO'),('RGH0000004','CLI0000003','HAB0000006','EMP0000001','2018-12-10','10:06:00',2,0,NULL,'CULMINADO'),('RGH0000005','CLI0000005','HAB0000002','EMP0000001','2018-12-10','12:12:00',2,0,NULL,'INICIAL'),('RGH0000006','CLI0000004','HAB0000001','EMP0000001','2018-12-10','12:15:00',2,0,NULL,'INICIAL'),('RGH0000007','CLI0000006','HAB0000007','EMP0000001','2018-12-10','20:00:00',2,0,NULL,'CULMINADO'),('RGH0000008','CLI0000002','HAB0000007','EMP0000002','2018-12-10','13:02:00',1,0,NULL,'INICIAL'),('RGH0000009','CLI0000006','HAB0000008','EMP0000001','2018-12-10','12:23:00',2,2,NULL,'CULMINADO');
 
 /*Table structure for table `registro_salida` */
 
@@ -220,6 +243,8 @@ CREATE TABLE `registro_salida` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `registro_salida` */
+
+insert  into `registro_salida`(`cod_ventahab`,`fecha_salida`,`hora_salida`,`insidencias_salida`) values ('RGH0000001','2018-12-13','12:12:00','niguna'),('RGH0000002','2018-12-11','10:15:00','NINGUNA'),('RGH0000003','2018-12-12','10:12:00','NINGUNA'),('RGH0000004','2018-12-12','15:00:00','NINGUNA'),('RGH0000007','2018-12-20','08:00:00','MALOGRARON LA CAMA'),('RGH0000009','2018-12-11','12:00:00','NINGUNA');
 
 /*Table structure for table `reserva` */
 
@@ -309,11 +334,11 @@ CREATE TABLE `tipo_empleado` (
   `cod_tipoem` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_emleado` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`cod_tipoem`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tipo_empleado` */
 
-insert  into `tipo_empleado`(`cod_tipoem`,`tipo_emleado`) values (1,'ADMINISTRADOR'),(2,'RECEPCIONISTA'),(5,'CAJERO');
+insert  into `tipo_empleado`(`cod_tipoem`,`tipo_emleado`) values (1,'ADMINISTRADOR'),(2,'RECEPCIONISTA'),(5,'CAJERO'),(6,'LIMPIEZA');
 
 /*Table structure for table `tipo_habitacion` */
 
@@ -328,7 +353,7 @@ CREATE TABLE `tipo_habitacion` (
 
 /*Data for the table `tipo_habitacion` */
 
-insert  into `tipo_habitacion`(`cod_tipoh`,`tipo_habitacion`,`descripcion`) values ('TPH01','MATRIMONIAL','HABITACION PARA DOS PAREJAS'),('TPH02','PERSONAL','HABITACION PARA UNA SOLA PERSONA'),('TPH03','TRIPE','HABITACION PARA TRES PERSONAS');
+insert  into `tipo_habitacion`(`cod_tipoh`,`tipo_habitacion`,`descripcion`) values ('TPH01','MATRIMONIAL','HABITACION PARA DOS PAREJAS'),('TPH02','PERSONAL','HABITACION PARA UNA SOLA PERSONA'),('TPH03','TRIPLE','HABITACION PARA TRES PERSONAS'),('TPH04','FAMILIAR','UNA HABITACION PARA MUCHAS PERSONAS');
 
 /*Table structure for table `tipo_pago` */
 
@@ -956,7 +981,7 @@ BEGIN
 FROM `tipo_doccliente` AS TDC INNER JOIN cliente AS C ON TDC.`cod_tipdoccl` = C.`cod_tipdoccl` INNER JOIN `registro_habitacion` AS RH
 ON C.`cod_cliente` = RH.`cod_cliente` INNER JOIN `habitacion` AS H ON H.`cod_habitacion` = rh.`cod_habitacion` INNER JOIN `tipo_habitacion` AS TH
 ON TH.`cod_tipoh`=H.`cod_tipoh` INNER JOIN estado_habitacion AS EH ON EH.`cod_estado` = H.`cod_estado`
-WHERE EH.`estado_habitacion` = 'OCUPADA';
+WHERE EH.`estado_habitacion` = 'OCUPADA' and RH.estado = 'INICIAL';
     END */$$
 DELIMITER ;
 
@@ -969,6 +994,8 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_IngresaCliente`(nom VARCHAR(100), ape VARCHAR(100), rason VARCHAR(100), tip_doc CHAR(5), doc CHAR(9), dire VARCHAR(200), fono CHAR(10), email VARCHAR(200) )
 BEGIN
     DECLARE id CHAR(10);
+    declare est varchar(100);
+    set est = 'HOSPEDADO';
 		SET id=(SELECT CONCAT("CLI",RIGHT(CONCAT("0000000",
 		MAX(SUBSTRING(`cod_cliente`,7)+1)),7)) FROM `cliente`);
 			BEGIN 
@@ -976,8 +1003,8 @@ BEGIN
 					SET id='CLI0000001';
 				END IF;
 			END;
-		INSERT INTO cliente (`cod_cliente`,nombres, apellidos, rason_social, cod_tipdoccl,documento, direccion, telefono,email)
-		VALUES (id,nom, ape, rason, tip_doc, doc, dire, fono, email);
+		INSERT INTO cliente (`cod_cliente`,nombres, apellidos, rason_social, cod_tipdoccl,documento, direccion, telefono,email,estado)
+		VALUES (id,nom, ape, rason, tip_doc, doc, dire, fono, email, est);
     END */$$
 DELIMITER ;
 
@@ -1148,12 +1175,20 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_IngresaRegistroSalida`(cod_reg char(10),fech date,hora time,insid varchar(200))
 BEGIN
-    
+ declare cod_hab char(10);
+ 
+ set cod_hab = (SELECT H.`cod_habitacion`
+FROM `habitacion` AS H INNER JOIN `registro_habitacion` AS RH ON H.`cod_habitacion`= RH.`cod_habitacion`
+WHERE RH.`cod_ventahab` = cod_reg);
+update  habitacion
+set `cod_estado` = 'ETH04'
+where `cod_habitacion` = cod_hab;
 		INSERT INTO `registro_salida` (`cod_ventahab`,`fecha_salida`,`hora_salida`,`insidencias_salida`)
 		VALUES (cod_reg,fech,hora,insid);
 		update registro_habitacion
 		set estado='CULMINADO'
 		where cod_ventahab=cod_reg;
+		
     END */$$
 DELIMITER ;
 
@@ -1349,17 +1384,42 @@ BEGIN
     END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `sp_RegistraLimpieza` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_RegistraLimpieza` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_RegistraLimpieza`( cod_em char(10), fechalim date, hrlim time, insi varchar(200), cod_hab char(10))
+BEGIN
+    DECLARE id CHAR(10);
+		SET id=(SELECT CONCAT("RLP",RIGHT(CONCAT("0000000",
+		MAX(SUBSTRING(`Cod_Limpieza`,7)+1)),7)) FROM `limpieza`);
+			BEGIN 
+				IF ISNULL(id) THEN 
+					SET id='RLP0000001';
+				END IF;
+			END;
+			
+		insert into `limpieza`(`Cod_Limpieza`, `cod_empleado`, `fecha_Limpieza`, `hora_limpieza`, `Insidencias`, `cod_hab`)
+		values(id,cod_em,fechalim,hrlim,insi, cod_hab );
+		update habitacion 
+		set cod_estado ='ETH01'
+		where cod_habitacion = cod_hab;		
+    END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `sp_retornaRegistroHabitacion` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `sp_retornaRegistroHabitacion` */;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_retornaRegistroHabitacion`(num char(10))
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_retornaRegistroHabitacion`()
 BEGIN
-    SELECT rh.`cod_ventahab`, CONCAT( c.`nombres`," ",c.`apellidos`) AS 'CLIENTE', rh.`fecha_ingreso`, rh.`hora_ingreso`
+    SELECT rh.`cod_ventahab`, CONCAT( c.`nombres`," ",c.`apellidos`) AS 'CLIENTE', rh.`fecha_ingreso`, rh.`hora_ingreso`,H.numero 
 FROM `habitacion` AS H INNER JOIN `registro_habitacion` AS RH ON H.`cod_habitacion`= RH.`cod_habitacion` INNER JOIN cliente AS C ON C.`cod_cliente` = RH.`cod_cliente`
-WHERE h.`numero` = num AND rh.`estado`='INICIADO';
+WHERE rh.`estado`='INICIAL' and c.estado = "HOSPEDADO";
     END */$$
 DELIMITER ;
 

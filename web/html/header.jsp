@@ -80,14 +80,18 @@
             </li>
 
 
-
+            <% if (T.getCod_temp() == 1 || T.getCod_temp() == 2) { %>
             <li><a href="recepcion.jsp"><i class="fa fa-bed"></i> <span>Recepcion</span></a></li>
             <li><a href="checkout.jsp"><i class="fa fa-sign-out"></i> <span>Check Out</span></a></li>
             <li><a href="reservas.jsp"><i class="fa fa-calendar"></i> <span>Reservas</span></a></li>
             <li><a href="Clientes.jsp"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
+            <li><a href="venta.jsp"><i class="fa fa-newspaper-o"></i> <span>Facturacion</span></a></li>
+             <% } if (T.getCod_temp() == 1) { %>
             <li><a href="#"><i class="fa fa-money"></i> <span>Modulo Caja</span></a></li>
-            <li><a href="limpieza.jsp"><i class="fa fa-money"></i> <span>Limpieza</span></a></li>
 
+            <% } if (T.getCod_temp() == 1 || T.getCod_temp() == 6) { %>
+            <li><a href="limpieza.jsp"><i class="fa fa-bath"></i> <span>Limpieza</span></a></li> 
+                <% } if (T.getCod_temp() == 1) { %>
             <li class="treeview">
                 <a href="#"><i class="fa fa-bank"></i> <span>Habitaciones</span>
                     <span class="pull-right-container">
@@ -101,8 +105,6 @@
                     <li><a href="estadohabitacion.jsp">Estados</a></li>
                 </ul>
             </li>
-            <% if (T.getCod_temp() == 1) { %>  
-
 
             <li class="treeview">
                 <a href="#"><i class="fa fa-cog"></i> <span>Administracion</span>
@@ -118,8 +120,7 @@
 
                 </ul>
             </li>
-
-            <%}%>
+            <% }%>
         </ul>
     </section>
     <!-- /.sidebar -->

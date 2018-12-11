@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-yellow">
+                            <div class="small-box bg-yellow-active">
                                 <div class="inner">
                                     <h3><%= HabitacionDAO.HabOcupadas()%></h3>
 

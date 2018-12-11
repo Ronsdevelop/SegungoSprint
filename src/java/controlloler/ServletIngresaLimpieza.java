@@ -5,6 +5,7 @@
  */
 package controlloler;
 
+import dao.LimpiezaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Limpieza;
 
 /**
  *
  * @author Rony
  */
-@WebServlet(name = "pruebas", urlPatterns = {"/pruebas"})
-public class pruebas extends HttpServlet {
+@WebServlet(name = "ServletIngresaLimpieza", urlPatterns = {"/ServletIngresaLimpieza"})
+public class ServletIngresaLimpieza extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,10 @@ public class pruebas extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet pruebas</title>");            
+            out.println("<title>Servlet ServletIngresaLimpieza</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet pruebas at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletIngresaLimpieza at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,37 +74,27 @@ public class pruebas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String cod = request.getParameter("cod");
-        String nombres = request.getParameter("nom");
-        String apellido = request.getParameter("ape");
-        String razon_social = request.getParameter("raz");
-        String tipo_doc = request.getParameter("tip");
-        String nro_documento = request.getParameter("nro");
-        String direccion = request.getParameter("dir");
-        String telefono = request.getParameter("tel");
-        String email = request.getParameter("ema");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet pruebas</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> " + cod + "</h1>");
-            out.println("<h1> " + nombres + "</h1>");
-            out.println("<h1> " + apellido + "</h1>");
-            out.println("<h1> " + razon_social+ "</h1>");
-            out.println("<h1> " + tipo_doc + "</h1>");
-            out.println("<h1> " + nro_documento + "</h1>");
-            out.println("<h1> " + direccion + "</h1>");
-            out.println("<h1> " + telefono+ "</h1>");
-            out.println("<h1> " + email+ "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String em = request.getParameter("emp");
+
+        String fecha = request.getParameter("fecha");
+        String hora = request.getParameter("hora");
+        String insi = request.getParameter("insi");
+        String cod_h = request.getParameter("cod");
+
+        Limpieza rs = new Limpieza();
+        rs.setCoc_emplea(em);
+        rs.setFecha_lim(fecha);
+        rs.setHora_lim(hora);
+        rs.setInsidencias(insi);
+        rs.setCod_hab(cod_h);
+
+        if (LimpiezaDAO.RegistroLimpieza(rs)) {
+            request.setAttribute("mensaje", "Registro Correcto");
+        } else {
+            request.setAttribute("mensaje", "Registro Incorrecto");
         }
-        
-      
+        response.sendRedirect("vistas/limpieza.jsp");
+
     }
 
     /**

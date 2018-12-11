@@ -26,7 +26,7 @@
                 <!-- Content Header (Page header) -->
                 <section  class="content-header">
                     <h1>
-                        <i class="fa fa-bed"></i> AREA DE LIMPIEZA
+                        <i class="fa fa-bath"></i> AREA DE LIMPIEZA
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -86,7 +86,7 @@
 
                     <div class="modal fade" id="modalEdit">
                         <div class="modal-dialog">
-                            <form class="form-horizontal" method="post" id="cliente_form" action="../ServletRegistrarHabitacion">
+                            <form class="form-horizontal" method="post" id="cliente_form" action="../ServletIngresaLimpieza">
                                 <div class="modal-content">
                                     <div class="modal-header bg-aqua  ">
                                         <h3 class="modal-title text-center" id="tituloEdit"></h3>
@@ -123,7 +123,7 @@
                                     </div>
                                     <!--modal-body-->
                                     <div class="modal-footer bg-aqua ">                            
-                                        <button type="submit" name="action" id="#" class="btn btn-primary pull-left" value="Add"><i class="glyphicon glyphicon-floppy-save" aria-hidden="true"></i> Registrar </button>
+                                        <button type="submit" name="action" id="#" href="" class="btn btn-primary pull-left" value="Add"><i class="glyphicon glyphicon-floppy-save" aria-hidden="true"></i> Limpiar </button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
                                     </div>
                                 </div>

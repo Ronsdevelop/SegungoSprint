@@ -91,7 +91,7 @@ public class ServletIngresaRegSalida extends HttpServlet {
         }else{
              request.setAttribute("mensaje", "Registro Incorrecto");
         }
-        response.sendRedirect("vistas/checkout.jsp");        
+        response.sendRedirect("vistas/venta.jsp");        
         
      
     }

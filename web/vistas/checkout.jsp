@@ -66,7 +66,7 @@
                                     if (hab.getValueAt(h, 1).equals(niv.getValueAt(i, 1)) && hab.getValueAt(h, 2).equals(es.getValueAt(canes, 0)) && (es.getValueAt(canes, 1).equals("OCUPADA"))) {
 
                                         out.print("<div class='col-lg-3 col-x6'>");
-                                        out.print("<div class='small-box bg-yellow'>");
+                                        out.print("<div class='small-box bg-yellow-active'>");
                                         out.print("<div class='inner'>");
                                         out.print("<h3>" + hab.getValueAt(h, 0) + "</h3>");
                                         out.print("<p  style='margin: 0 ;'>" + TipoHabitacionDAO.getTipo(hab.getValueAt(h, 5).toString()) + "</p>");
@@ -137,7 +137,7 @@
                                         </div> 
                                         <br>
                                         <div class="input-group">
-                                            <span class="input-group-addon">Insidencias</span>
+                                            <span class="input-group-addon">Incidencias</span>
                                             <textarea class="form-control "  name="insi" rows="3"></textarea>
                                         </div>
                                         <br>                                      
