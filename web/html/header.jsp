@@ -1,11 +1,16 @@
+
 <%@page import="model.TipoEmpleado"%>
 <%@page import="dao.Consultas"%>
 <%@page import="model.Empleados"%>
+<%@page import="java.util.Date" %>
 
 
 <% Empleados E = (Empleados) session.getAttribute("user"); %>
 <% Consultas c = new Consultas(); %>
 <% TipoEmpleado T = c.getCargo(E.getCod_tipoem());%>
+
+
+
 
 <header class="main-header">
     <!-- Logo -->
@@ -17,10 +22,7 @@
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+
         </a>
 
 
@@ -40,14 +42,14 @@
 
                             <p>
                                 <%= E.getNombres() + " " + E.getApellidos()%>
-                                <small>Noviembre 2018</small>
+                                <small> Diciembre 2018</small>
                             </p>
                         </li>
 
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                <a  data-toggle="modal" data-target="#modal-info" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 <a href="../CerrarSesionServlet" class="btn btn-default btn-flat">Salir</a>
@@ -86,12 +88,15 @@
             <li><a href="reservas.jsp"><i class="fa fa-calendar"></i> <span>Reservas</span></a></li>
             <li><a href="Clientes.jsp"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
             <li><a href="venta.jsp"><i class="fa fa-newspaper-o"></i> <span>Facturacion</span></a></li>
-             <% } if (T.getCod_temp() == 1) { %>
+                <% }
+                    if (T.getCod_temp() == 1 || T.getCod_temp() == 3) { %>
             <li><a href="#"><i class="fa fa-money"></i> <span>Modulo Caja</span></a></li>
 
-            <% } if (T.getCod_temp() == 1 || T.getCod_temp() == 6) { %>
+            <% }
+                if (T.getCod_temp() == 1 || T.getCod_temp() == 4) { %>
             <li><a href="limpieza.jsp"><i class="fa fa-bath"></i> <span>Limpieza</span></a></li> 
-                <% } if (T.getCod_temp() == 1) { %>
+                <% }
+                    if (T.getCod_temp() == 1) { %>
             <li class="treeview">
                 <a href="#"><i class="fa fa-bank"></i> <span>Habitaciones</span>
                     <span class="pull-right-container">
@@ -122,6 +127,7 @@
             </li>
             <% }%>
         </ul>
+
     </section>
     <!-- /.sidebar -->
 </aside>

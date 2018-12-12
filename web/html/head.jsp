@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>HOTEL LAS AMERICAS </title>
-<!-- Tell the browser to be responsive to screen width -->
+<!-- Dígale al navegador que responda al ancho de la pantalla -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="../Publico/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -12,17 +12,17 @@
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <!-- DataTables -->
 <link rel="stylesheet" href="../Publico/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-<!-- Theme style -->
+<!-- Estilos del tema -->
 <link rel="stylesheet" href="../Publico/dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="../Publico/dist/css/skins/_all-skins.min.css">
+<!-- Skins. Elige un skin desde el css / skins
+     carpeta en lugar de descargarlos todos para reducir la carga. -->
+ <link rel="stylesheet" href="../Publico/dist/css/skins/_all-skins.min.css"> 
+
 <link href="../Publico/propios/styles.css" rel="stylesheet" type="text/css"/>
 
 <!-- TABLES RESPONSIVES -->
 <link href="../Publico/bower_components/datatables.net-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="../Publico/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
 
 <!-- Google Font -->
 <link rel="stylesheet"

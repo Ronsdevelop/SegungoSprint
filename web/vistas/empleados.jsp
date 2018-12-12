@@ -7,7 +7,8 @@
 <% if (E != null) { %>  
 <%@page import="dao.TEmpleadoDAO"%>
 <% TEmpleadoDAO T = new TEmpleadoDAO();%>
-
+<% Consultas c = new Consultas(); %>
+<% TipoEmpleado TPE = c.getCargo(E.getCod_tipoem());%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,9 @@
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             <jsp:include page="../html/header.jsp" />
+
+            <%
+                if (TPE.getCod_temp() == 1) { %>
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -187,7 +191,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer bg-primary">
-                                          <button type="submit" name="action" id="#" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+                                        <button type="submit" name="action" id="#" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
                                     </div>
                                 </form>
@@ -200,6 +204,8 @@
                 <!-- /.content -->
 
             </div>
+            <% } else {%> <jsp:include page="../html/noacceso.jsp" />
+            <% } %>
             <jsp:include page="../html/footer.jsp" />
         </div>
         <jsp:include page="../html/scripts.html"  />
